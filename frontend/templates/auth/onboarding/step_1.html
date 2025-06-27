@@ -1,0 +1,74 @@
+<!-- Step 1-->
+  <div class="border-b border-gray-900/10 pb-12 gap-8 py-2 w-full">
+    <div class="mt-2 grid grid-cols-1 gap-x-6 gap-y-8 w-full">
+      <div class="mb-2 w-full">
+        <label
+          for="{{ form.nickname.id_for_label }}"
+          class="block text-sm/6 font-small text-textCl-700"
+          >Username</label
+        >
+        <div class="mt-2 w-full">
+          <input
+            type="text"
+            name="nickname"
+            id="{{ form.nickname.id_for_label }}"
+            class="flex items-center border border-gray-200 w-full p-2 text-gray-600 rounded-lg bg-white pl-3 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary-600"
+            value="{{ form.nickname.value|default:'' }}"
+            placeholder="username"
+            title="Username must be 3-20 characters long and can only contain letters, numbers, and underscores."
+            required
+            autocomplete="username"
+          />
+          {% if form.nickname.errors %}
+            <p class="mt-1 text-sm text-red-600">{{ form.nickname.errors.0 }}</p>
+          {% endif %}
+        </div>
+      </div>
+      <div class="mb-2 w-full">
+        <label
+          for="{{ form.first_name.id_for_label }}"
+          class="block text-sm/6 font-medium text-textCl-700"
+          >First name</label
+        >
+        <div class="mt-2">
+          <input
+            type="text"
+            name="first_name"
+            id="{{ form.first_name.id_for_label }}"
+            class="flex items-center border border-gray-200 p-2 w-full text-gray-600 rounded-lg bg-white pl-3 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary-600"
+            value="{{ form.first_name.value|default:'' }}"
+            placeholder="first name"
+            title="First name must be 2-20 characters long and can only contain letters."
+            required
+            autocomplete="given-name"
+          />
+          {% if form.first_name.errors %}
+            <p class="mt-1 text-sm text-red-600">{{ form.first_name.errors.0 }}</p>
+          {% endif %}
+        </div>
+      </div>
+      <div class="mb-2 w-full">
+        <label
+          for="{{ form.last_name.id_for_label }}"
+          class="block text-sm/6 font-medium text-textCl-700"
+          >Last name</label
+        >
+        <div class="mt-2">
+          <input
+            type="text"
+            name="last_name"
+            id="{{ form.last_name.id_for_label }}"
+            class="flex items-center border border-gray-200 w-full p-2 text-gray-600 rounded-lg bg-white pl-3 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary-600"
+            value="{{ form.last_name.value|default:'' }}"
+            placeholder="last name"
+            title="Last name must be 2-20 characters long and can only contain letters."
+            required
+            autocomplete="family-name"
+          />
+          {% if form.last_name.errors %}
+            <p class="mt-1 text-sm text-red-600">{{ form.last_name.errors.0 }}</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>

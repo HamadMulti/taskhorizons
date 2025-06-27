@@ -1,0 +1,133 @@
+{% extends 'base.html' %}{% block title %}Breath | Login (Welcome back ready to explore) {% endblock %} {% load static%} 
+{% block navigation %}{% endblock %}{% block content %}
+<section class="bg-backgrounds-50 dark:bg-backgrounds-900 w-full pt-4">
+  <div
+    class="flex flex-col items-center justify-center px-6 py-18 mx-auto md:h-screen lg:py-0"
+  >
+  <a
+      href="{% url 'landing_page' %}"
+      class="flex items-center mb-6 text-2xl font-semibold text-logo-600 dark:text-white"
+    >
+      <img
+        class="w-8 h-8 mr-2"
+        src="{% static 'images/logo/logo.png' %}"
+        alt="Breath"
+      />
+      Breathe
+    </a>
+    <div
+      class="w-full bg-backgrounds rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-backgrounds-800 dark:border-backgrounds-700"
+    >
+      <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
+        <h1
+          class="text-xl font-bold leading-tight tracking-tight text-textCl-900 md:text-2xl dark:text-textCl-primary"
+        >
+          👋 Welcome back!
+        </h1>
+
+        <form method="post" class="space-y-4 md:space-y-6">
+          {% csrf_token %}
+
+          <!-- General Form Errors -->
+          {% if form.non_field_errors %}
+          <p class="mt-3 text-sm text-red-600">{{ form.non_field_errors.0 }}</p>
+          {% endif %}
+
+          <!-- Email -->
+          <div>
+            <label
+              for="{{ form.username.id_for_label }}"
+              class="block mb-2 text-sm font-medium text-textCl-900 dark:text-textCl-primary"
+            >
+              Your email
+            </label>
+            <input
+              type="email"
+              name="username"
+              id="{{ form.username.id_for_label }}"
+              class="bg-backgrounds-50 border border-backgrounds-300 text-textCl-900 text-sm rounded-lg focus:ring-backgrounds-600 focus:border-backgrounds-600 block w-full p-2.5 dark:bg-backgrounds-700 dark:border-backgrounds-600 dark:placeholder-backgrounds-400 dark:text-textCl-primary dark:focus:ring-backgrounds-500 dark:focus:border-backgrounds-500"
+              placeholder="jhondoe@company.com"
+              required
+              value="{{ form.username.value|default:'' }}"
+            />
+            {% if form.email.errors %}
+            <p class="mt-1 text-sm text-red-600">{{ form.email.errors.0 }}</p>
+            {% endif %}
+          </div>
+
+          <!-- Password 1 -->
+          <div>
+            <label
+              for="{{ form.password.id_for_label }}"
+              class="block mb-2 text-sm font-medium text-textCl-900 dark:text-textCl-primary"
+            >
+              Password
+            </label>
+            <input
+              type="password"
+              name="password"
+              id="{{ form.password.id_for_label }}"
+              class="bg-backgrounds-50 border border-backgrounds-300 text-textCl-900 text-sm rounded-lg focus:ring-backgrounds-600 focus:border-backgrounds-600 block w-full p-2.5 dark:bg-backgrounds-700 dark:border-backgrounds-600 dark:placeholder-backgrounds-400 dark:text-textCl-primary dark:focus:ring-backgrounds-500 dark:focus:border-backgrounds-500"
+              placeholder="••••••••"
+              required
+            />
+            {% if form.password.errors %}
+            <p class="mt-1 text-sm text-red-600">
+              {{ form.password.errors.0 }}
+            </p>
+            {% endif %}
+          </div>
+
+          <!-- Remember Me -->
+          <div class="flex items-center justify-between">
+            <div class="flex items-start">
+                <div class="flex items-center h-5">
+                  <input id="remember" aria-describedby="remember" type="checkbox" 
+                  class="w-4 h-4 border border-backgrounds-300 rounded bg-backgrounds-50 focus:ring-3 focus:ring-backgrounds-300 dark:bg-backgrounds-700 dark:border-backgrounds-600 dark:focus:ring-backgrounds-600 dark:ring-offset-backgrounds-800">
+                </div>
+                <div class="ml-3 text-sm">
+                  <label for="remember" class="text-textCl-500 dark:text-textCl-300">Remember me</label>
+                </div>
+            </div>
+            <a href="{% url 'password_reset' %}" class="text-sm font-medium text-textCl-600 hover:underline dark:text-textCl-500">Forgot password?</a>
+          </div>
+
+          <!-- Submit Button -->
+          <button
+            type="submit"
+            class="w-full text-textCl-primary bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
+          >
+            Login
+          </button>
+          <!-- Loading Spinner (Hidden by Default) -->
+          <div id="loading_spinner" class="hidden">
+            <button class="w-full text-textCl-primary bg-primary-600 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
+              <div class="flex flex-row items-center justify-center space-x-2">
+                <span>Login</span>
+                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 animate-spin fill-white block mx-auto"
+                  viewBox="0 0 24 24">
+                  <path d="M12 22c5.421 0 10-4.579 10-10h-2c0 4.337-3.663 8-8 8s-8-3.663-8-8c0-4.336 3.663-8 8-8V2C6.579 2 2 6.58 2 12c0 5.421 4.579 10 10 10z"/>
+                </svg>
+              </div>
+            </button>
+          </div>
+
+          <!-- Login Redirect -->
+          <p class="text-sm font-light text-textCl-500 dark:text-textCl-400">
+            Not registered yet?
+            <a
+              href="{% url 'register' %}"
+              class="font-medium text-textCl-600 hover:underline dark:text-textCl-500"
+              >Create an account</a
+            >
+          </p>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script src="{% static 'js/loader.js' %}"></script>
+{% endblock %}
+{% block footer %}{% endblock %}

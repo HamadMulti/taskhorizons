@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+{% block title %}Breath | Authenticator OTP Verification {% endblock %} {% load static%} 
+{% block navigation %}{% endblock %}
+{% block content %}
+<div class="relative flex min-h-screen flex-col justify-center overflow-hidden bg-backgrounds-50 py-12">
+  <div class="relative bg-backgrounds px-6 pt-10 pb-9 shadow-xl mx-auto w-full max-w-lg rounded-2xl">
+    <div class="mx-auto flex w-full max-w-md flex-col space-y-16">
+      <div class="flex flex-col items-center justify-center text-center space-y-2">
+        <div class="font-semibold text-3xl text-textCl-900">
+          <p class="text-textCl-900">
+            Device Verification</p>
+        </div>
+        <div class="flex flex-row text-sm font-medium text-textCl-400">
+            <p>Use your Google Authenticator app to verify your device</p>
+        </div>
+      </div>
+      <div>
+        <form method="post" id="otp_form">
+          {% csrf_token %}
+          <div class="flex flex-col space-y-16">
+            <div class="flex flex-row items-center justify-between mx-auto w-full max-w-xs gap-4">
+              {% for i in "012345" %}
+              <div class="w-16 h-16">
+                <input 
+                  class="otp-input w-full h-full flex flex-col items-center justify-center text-center text-textCl-600 px-2 outline-none rounded-xl border border-backgrounds-300 text-lg bg-backgrounds-100 focus:bg-backgrounds-100 focus:ring-2 ring-backgrounds-700"
+                  type="text" name="otp_digit" maxlength="1" pattern="[0-9]" inputmode="numeric">
+              </div>
+              {% endfor %}
+            </div>            
+      
+            <!-- Hidden input to store final OTP -->
+            <input type="hidden" name="token" id="otp_token">
+            <div class="flex flex-col space-y-5 w-full">
+              <div class="flex flex-row items-center justify-center space-x-1 w-full flex-1">
+                <a id="logout_btn" class="flex flex-row items-center justify-center text-center w-full border rounded-xl px-6 outline-none py-5 bg-red-700 border-none text-textCl-primary text-sm shadow-sm" href="{% url 'logout' %}">Logout</a>
+                <div class="w-full">
+                  <button id="submit_btn" class="flex flex-row items-center justify-center text-center px-6 w-full border rounded-xl outline-none py-5 bg-backgrounds-700 border-none text-textCl-primary text-sm shadow-sm">
+                    Verify Account
+                  </button>
+                  <!-- Loading Spinner (Hidden by Default) -->
+                  <div id="loading_spinner" class="hidden">
+                    <button id="submit_btn" class="flex flex-row items-center justify-center text-center px-6 w-full border rounded-xl outline-none py-5 bg-backgrounds-700 border-none text-white text-sm shadow-sm">
+                      <div class="flex flex-row items-center justify-center space-x-2">
+                        <span>Verify Account</span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 animate-spin fill-white block mx-auto"
+                          viewBox="0 0 24 24">
+                          <path d="M12 22c5.421 0 10-4.579 10-10h-2c0 4.337-3.663 8-8 8s-8-3.663-8-8c0-4.336 3.663-8 8-8V2C6.579 2 2 6.58 2 12c0 5.421 4.579 10 10 10z"/>
+                        </svg>
+                      </div>
+                    </button>
+                  </div>
+                </div>
+                </div>
+            </div>
+          </div>
+        </form>
+      </div>
+{% endblock %}
+{% block scripts %}
+  <script src="{% static 'js/verification.js' %}"></script>
+{% endblock %}
+{% block footer %}{% endblock %}

@@ -1,0 +1,110 @@
+{% extends "dashboard_base.html" %}
+
+{% block title %}Breathe | View Content{% endblock %}
+
+{% block content %}
+<div class="max-w-6xl mx-auto p-6 top-8 bg-white shadow-md rounded">
+    <div class="text-center w-full">
+        <h2 class="text-2xl font-bold">{{ category.name }} Questions</h2>
+    </div>
+    <div x-data="{ activeCategory: '{{ category_slug }}' }">
+        <!-- Tabs -->
+        <div class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
+            <ul class="flex flex-wrap -mb-px">
+                {% for category in categories %}
+                    <li class="me-2">
+                        <a href="{% url 'content_by_category' category.id %}" 
+                            @click="activeCategory = '{{ category.slug }}'; window.location = '{% url 'content_by_category' category.id %}'"
+                            :class="activeCategory === '{{ category.slug }}' ? 'text-primary-600 border-primary-600' : 'hover:text-gray-600 hover:border-gray-300'"
+                            class="inline-block p-4 border-b-2 border-transparent rounded-t-lg dark:hover:text-gray-300">
+                            {{ category.name }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+        <!-- Tab Content -->
+        <div class="p-4 hidden">
+            {% for category in categories %}
+                <div x-show="activeCategory === '{{ category.slug }}'" class="p-4 bg-gray-100 dark:bg-gray-800 rounded-lg">
+                    <p>Click a question to start:</p>
+                    <ul class="mt-2">
+                        {% for question in page_obj.object_list %}
+                            <li>
+                                <a href="{% url 'content_detail' category.id question.id %}" class="text-blue-600 hover:underline">
+                                    {{ question.text|truncatewords:8 }}
+                                </a>
+                            </li>
+                        {% empty %}
+                            <p class="text-gray-500">No questions available.</p>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endfor %}
+            <!-- Pagination Controls -->
+            <nav aria-label="Page navigation example" class="mt-6 w-full flex justify-center items-center">
+                <ul class="inline-flex -space-x-px text-sm w-full justify-center items-center">
+                    {% if page_obj.has_previous %}
+                        <li>
+                            <a href="?page=1" class="flex items-center justify-center px-3 h-8 ms-0 leading-tight text-gray-500 bg-white border border-e-0 border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">First</a>
+                        </li>
+                        <li>
+                            <a href="?page={{ page_obj.previous_page_number }}" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-s-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Previous</a>
+                        </li>
+                    {% else %}
+                        <span class="opacity-50 px-3 h-8 leading-tight">First</span>
+                        <span class="opacity-50 px-3 h-8 leading-tight">Previous</span>
+                    {% endif %}
+
+                    {% for num in page_obj.paginator.page_range %}
+                        {% if page_obj.number == num %}
+                            <li>
+                                <a href="?page={{ num }}" class="flex items-center justify-center px-3 h-8 text-blue-600 border border-gray-300 bg-blue-50 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white">{{ num }}</a>
+                            </li>
+                        {% else %}
+                            <li>
+                                <a href="?page={{ num }}" class="flex items-center justify-center px-3 h-8 text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">{{ num }}</a>
+                            </li>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if page_obj.has_next %}
+                        <li>
+                            <a href="?page={{ page_obj.next_page_number }}" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Next</a>
+                        </li>
+                        <li>
+                            <a href="?page={{ page_obj.paginator.num_pages }}" class="flex items-center justify-center px-3 h-8 leading-tight text-gray-500 bg-white border border-gray-300 rounded-e-lg hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white">Last</a>
+                        </li>
+                    {% else %}
+                        <span class="opacity-50 px-3 h-8 leading-tight">Next</span>
+                        <span class="opacity-50 px-3 h-8 leading-tight">Last</span>
+                    {% endif %}
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div class="mt-6">
+        <!-- Display the current question -->
+        <div class="text-center flex justify-center items-center">
+            <p class="border w-fit rounded-xl p-4 py-8 shadow-2xl">{{ current_question.text }}</p>
+        </div>
+        <!-- Navigation for Previous and Next Questions -->
+        <div class="flex justify-between mt-4">
+            {% if prev_question %}
+                <a href="{% url 'content_detail' category.id prev_question %}" class="bg-gray-500 text-white px-4 py-2 rounded">
+                    ← Previous
+                </a>
+            {% else %}
+                <span class="opacity-50 px-4 py-2 rounded">← Previous</span>
+            {% endif %}
+            {% if next_question %}
+                <a href="{% url 'content_detail' category.id next_question %}" class="bg-blue-500 text-white px-4 py-2 rounded">
+                    Next →
+                </a>
+            {% else %}
+                <span class="opacity-50 px-4 py-2 rounded">Next →</span>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

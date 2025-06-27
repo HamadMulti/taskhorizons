@@ -1,0 +1,17 @@
+{% load static %}
+<footer class="bg-backgrounds-50 dark:bg-backgrounds-800 w-full">
+  <div class="w-full p-4 py-8 mx-auto lg:py-16 md:p-8 lg:p-10">
+      <hr class="my-6 w-full border-backgrounds-200 sm:mx-auto dark:border-backgrounds-700 lg:my-8">
+      <div class="text-center">
+          <a href="{% url 'landing_page' %}" class="flex items-center justify-center mb-5 text-2xl font-semibold text-logo-600 dark:text-white">
+              <img src="{% static 'images/logo/logo.png' %}" class="h-6 mr-3 sm:h-9" alt="Breathe" />
+              Breathe
+          </a>
+          <span class="block text-sm text-center text-textCl-500 pb-2 dark:text-textCl-400">© <span id="date"></span> <a href="{% url 'landing_page' %}" class="text-textCl-700 hover:underline dark:text-textCl-900">Breathe</a>™. All Rights Reserved.
+          </span>
+      </div>
+  </div>
+</footer>
+<script>
+document.getElementById("date").textContent = new Date().getFullYear();
+</script>

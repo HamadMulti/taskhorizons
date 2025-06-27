@@ -1,0 +1,194 @@
+{% load static %}
+<header
+  id="navbar"
+  class="fixed w-full z-50 top-0 transition-all duration-300 shadow-md"
+>
+  <nav class="py-2.5 transition-all duration-300">
+    <div
+      class="flex flex-wrap items-center justify-between max-w-screen-xl px-4 mx-auto"
+    >
+      <a href="{% url 'landing_page' %}" class="flex items-center">
+        <img
+          src="{% static 'images/logo/logo.png' %}"
+          class="h-6 mr-3 sm:h-9"
+          alt="Breathe"
+        />
+        <span
+          id="nav-title"
+          class="self-center text-logo-600 text-xl font-semibold whitespace-nowrap transition-colors duration-300"
+        >
+          Breathe
+        </span>
+      </a>
+      <div class="flex items-center lg:order-2">
+        {% if user.is_authenticated %}
+        <a
+          href="{% url 'dashboard' %}"
+          class="transition-colors duration-300 text-textCl-primary bg-btns-700 hover:bg-btns-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0 dark:bg-btns-600 dark:hover:bg-btns-700 focus:outline-none dark:focus:ring-btns-800"
+        >
+          Dashboard
+        </a>
+        <a
+          href="{% url 'logout' %}"
+          data-tooltip-target="tooltip-logout"
+          class="inline-flex justify-center items-center p-2 text-textCl-600 rounded cursor-pointer dark:text-textCl-400 dark:hover:text-textCl-primary hover:text-textCl-600"
+        >
+          <svg
+            aria-hidden="true"
+            class="flex-shrink-0 w-8 h-8 text-gray-400 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+            viewBox="0 0 24 24"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+            stroke="currentColor"
+          >
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g
+              id="SVGRepo_tracerCarrier"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></g>
+            <g id="SVGRepo_iconCarrier">
+              <path
+                d="M8.00171 7C8.01382 4.82497 8.11027 3.64706 8.87865 2.87868C9.75733 2 11.1715 2 14 2H15C17.8284 2 19.2426 2 20.1213 2.87868C21 3.75736 21 5.17157 21 8V16C21 18.8284 21 20.2426 20.1213 21.1213C19.2426 22 17.8284 22 15 22H14C11.1715 22 9.75733 22 8.87865 21.1213C8.11027 20.3529 8.01382 19.175 8.00171 17"
+                stroke="#1C274C"
+                stroke-width="1.5"
+                stroke-linecap="round"
+              ></path>
+              <path
+                opacity="0.5"
+                d="M8 19.5C5.64298 19.5 4.46447 19.5 3.73223 18.7678C3 18.0355 3 16.857 3 14.5V9.5C3 7.14298 3 5.96447 3.73223 5.23223C4.46447 4.5 5.64298 4.5 8 4.5"
+                stroke="#1C274C"
+                stroke-width="1.5"
+              ></path>
+              <path
+                d="M15 12L6 12M6 12L8 14M6 12L8 10"
+                stroke="#1C274C"
+                stroke-width="1.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              ></path>
+            </g>
+          </svg>
+        </a>
+        <div
+          id="tooltip-logout"
+          role="tooltip"
+          class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-textCl-primary bg-btns-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip"
+        >
+          Logout
+          <div class="tooltip-arrow" data-popper-arrow></div>
+        </div>
+        {% else %}
+        <a
+          id="login-btn"
+          href="{% url 'login' %}"
+          class="transition-colors duration-300 px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 font-medium rounded-lg focus:ring-4 focus:outline-none"
+        >
+          Log in
+        </a>
+        <a
+          href="{% url 'register' %}"
+          class="text-textCl-primary bg-btns-700 hover:bg-btns-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0 dark:bg-btns-600 dark:hover:bg-btns-700 focus:outline-none dark:focus:ring-btns-800"
+        >
+          Sign Up
+        </a>
+        {% endif %}
+        <button
+          data-collapse-toggle="mobile-menu-2"
+          type="button"
+          class="p-2 ml-1 text-sm rounded-lg lg:hidden focus:ring-2"
+        >
+          <span class="sr-only">Open main menu</span>
+          <svg
+            class="w-6 h-6"
+            fill="currentColor"
+            viewBox="0 0 20 20"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              fill-rule="evenodd"
+              d="M3 5a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 10a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zM3 15a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1z"
+              clip-rule="evenodd"
+            ></path>
+          </svg>
+        </button>
+      </div>
+      <div
+        id="mobile-menu-2"
+        class="items-center justify-between hidden w-full lg:flex lg:w-auto lg:order-1"
+      >
+        <ul
+          id="nav-links"
+          class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0"
+        >
+          <li><a href="#hero" class="nav-link">Home</a></li>
+          <li><a href="#features" class="nav-link">Features</a></li>
+          <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</header>
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const navbar = document.getElementById("navbar");
+    const navTitle = document.getElementById("nav-title");
+    const loginBtn = document.getElementById("login-btn");
+    const navLinks = document.querySelectorAll(".nav-link");
+
+    function handleScroll() {
+      if (window.scrollY === 0) {
+        navbar.classList.remove("bg-backgrounds-50", "border-backgrounds-200", "shadow-md");
+        navbar.classList.add("bg-transparent", "border-none");
+        navTitle.classList.remove("text-logo-600");
+        navTitle.classList.add("text-white");
+        if (loginBtn) {
+          loginBtn.classList.remove(
+            "text-textCl-800",
+            "hover:bg-btns-50",
+            "focus:ring-btns-300"
+          );
+          loginBtn.classList.add(
+            "text-white",
+            "hover:bg-btns-700",
+            "focus:ring-btns-600"
+          );
+        }
+        navLinks.forEach((link) => {
+          link.classList.remove("text-textCl-700", "hover:text-textCl-700");
+          link.classList.add("text-white", "hover:text-textCl-300");
+        });
+      } else {
+        navbar.classList.remove("bg-transparent", "border-none");
+        navbar.classList.add(
+          "bg-backgrounds-50",
+          "border-backgrounds-200",
+          "border-b",
+          "border-backgrounds-300",
+          "shadow-md"
+        );
+        navTitle.classList.remove("text-white");
+        navTitle.classList.add("text-logo-600");
+        if (loginBtn) {
+          loginBtn.classList.remove(
+            "text-white",
+            "hover:bg-btns-700",
+            "focus:ring-btns-600"
+          );
+          loginBtn.classList.add(
+            "text-textCl-800",
+            "hover:bg-btns-700",
+            "focus:ring-btns-300"
+          );
+        }
+        navLinks.forEach((link) => {
+          link.classList.remove("text-white", "hover:text-textCl-300");
+          link.classList.add("text-textCl-700", "hover:text-textCl-700");
+        });
+      }
+    }
+
+    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+  });
+</script>

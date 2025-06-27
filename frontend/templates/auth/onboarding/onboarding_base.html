@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% block title %}Breath | Welcome Onboarding{% endblock %}
+{% load static %}
+{% load custom_filters %}
+{% block navigation %}{% endblock %}
+{% block content %}
+  <section class="flex justify-center items-center h-screen w-full bg-backgrounds-50">
+    <div id="onboarding-container" class="w-full max-w-lg mx-auto">
+      <div class="bg-backgrounds p-6 rounded-lg shadow-lg relative">
+        <div class="w-full bg-backgrounds-50 h-2 rounded mb-6 absolute top-0 left-0">
+          <div class="bg-primary-500 h-2 rounded" style="width: {{ progress }}%"></div>
+        </div>  
+        <!-- Step Indicators -->
+        <div class="flex justify-between mb-8">
+          {% for step_num, step_name in steps.items %}
+            <div class="text-center w-full">
+              <div class="w-8 h-8 mx-auto rounded-full flex items-center justify-center 
+                          {% if step_num == current_step %} bg-primary-500 text-white 
+                          {% else %} bg-gray-200 text-textCl-500 {% endif %}">
+                {{ step_num }}
+              </div>
+              <p class="text-xs mt-2 {% if step_num == current_step %} text-textCl-500 {% endif %}">
+                {{ step_name }}
+              </p>
+            </div>
+            {% endfor %}
+          </div>            
+          <div class="w-full" id="onboarding-step" >
+            <form
+              method="post"
+              enctype="multipart/form-data"
+              class="w-full animate-fade-in"
+            >
+              {% csrf_token %}
+              {% if current_step == 1 %}
+                {% include "auth/onboarding/step_1.html" %}
+              {% elif current_step == 2 %}
+                {% include "auth/onboarding/step_2.html" %}
+              {% elif current_step == 3 %}
+                {% include "auth/onboarding/step_3.html" %}
+              {% elif current_step == 4 %}
+                {% include "auth/onboarding/step_4.html" %}
+              {% elif current_step == 5 %}
+                <div class="text-center py-8">
+                  <h2 class="text-xl font-semibold text-textCl-900 mb-4">🎉 You're all set!</h2>
+                  <p class="mb-6 text-textCl-600">Thanks for completing your profile setup.</p>
+                  <a href="{% url 'dashboard' %}" class="bg-btns-500 text-white px-4 py-2 rounded">Go to Dashboard</a>
+                </div>
+              {% endif %}
+              {% if current_step < steps|length %}
+              <div class="mt-4 flex justify-between">
+                {% if current_step > 1 %}
+                <button
+                  type="submit"
+                  name="previous"
+                  class="px-4 py-2 bg-btns-600 rounded"
+                >
+                  Back
+                </button>
+                {% endif %}
+                <button
+                  type="submit"
+                  name="next"
+                  class="px-4 py-2 bg-btns-700 text-textCl-primary rounded"
+                >
+                  {% if current_step == steps|length %}Finish{% else %}Next{% endif %}
+                </button>
+              </div>
+              {% endif %}
+            </form>
+          </div>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    @keyframes fade-in {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .animate-fade-in {
+      animation: fade-in 0.3s ease-in-out forwards;
+    }
+  </style>
+{% endblock %}
+{% block footer%}{% endblock %}

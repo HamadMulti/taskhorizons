@@ -1,0 +1,11 @@
+{% extends "dashboard_base.html" %}
+
+{% block title %}Breathe | Dashboard{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto bg-white p-6 rounded-lg shadow-md text-center">
+    <h2 class="text-2xl font-bold mb-4">Welcome, {{ request.user.email }}!</h2>
+    <p>Your dashboard will display content based on your subscription.</p>
+    <a href="{% url 'logout' %}" class="text-red-500">Logout</a>
+</div>
+{% endblock %}

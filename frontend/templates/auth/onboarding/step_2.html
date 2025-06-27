@@ -1,0 +1,71 @@
+<!-- Step 2-->
+  <div class="border-b border-gray-900/10 pb-12 gap-8 py-2">
+    <div class="mt-2 grid grid-cols-1 gap-x-6 gap-y-8">
+      <div class="mb-2">
+        <label
+          for="{{ form.phone_number.id_for_label }}"
+          class="block text-sm/6 font-small text-textCl-700"
+          >Phone number</label
+        >
+        <div class="mt-2 w-full">
+          <input
+            type="tel"
+            name="phone_number"
+            id="{{ form.phone_number.id_for_label }}"
+            class="flex items-center border border-gray-200 p-2 w-full text-gray-600 rounded-lg bg-white pl-3 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary-600"
+            value="{{ form.phone_number.value|default:'' }}"
+            placeholder="000 0000 0000"
+            title="Format: 000 0000 0000"
+            required
+            autocomplete="tel"
+          />
+          {% if form.phone_number.errors %}
+            <p class="mt-1 text-sm text-red-600">{{ form.phone_number.errors.0 }}</p>
+          {% endif %}
+        </div>
+      </div>
+      <div class="mb-2 w-full">
+        <label
+          for="{{ form.address.id_for_label }}"
+          class="block text-sm/6 font-medium text-textCl-700"
+          >Address</label
+        >
+        <div class="mt-2">
+          <input
+            type="address"
+            name="address"
+            id="{{ form.address.id_for_label }}"
+            class="flex items-center border border-gray-200 w-full p-2 text-gray-600 rounded-lg bg-white pl-3 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary-600"
+            value="{{ form.address.value|default:'' }}"
+            placeholder="Address"
+            pattern="[0-9]{1,5} [A-Za-z0-9 ]+"
+            title="Format: 123 Main St"
+            autocomplete="address-line1"
+          />
+          {% if form.address.errors %}
+            <p class="mt-1 text-sm text-red-600">{{ form.address.errors.0 }}</p>
+          {% endif %}
+        </div>
+      </div>
+      <div class="mb-2 w-full">
+        <label
+          for="{{ form.date_of_birth.id_for_label }}"
+          class="block text-sm/6 font-medium text-textCl-700"
+          >Date of birth</label
+        >
+        <div class="mt-2 w-full">
+          <input
+            type="date"
+            name="date_of_birth"
+            id="{{ form.date_of_birth.id_for_label }}"
+            class="flex items-center border border-gray-200 p-2 w-full text-gray-600 rounded-lg bg-white pl-3 outline-1 -outline-offset-1 outline-gray-300 focus-within:outline-2 focus-within:-outline-offset-2 focus-within:outline-primary-600"
+            value="{{ form.date_of_birth.value|date:'Y-m-d' }}"
+            placeholder="last name"
+          />
+          {% if form.date_of_birth.errors %}
+            <p class="mt-1 text-sm text-red-600">{{ form.date_of_birth.errors.0 }}</p>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>

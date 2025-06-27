@@ -1,0 +1,48 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>
+      {% block title %}Breath | Welcome trivia test your mind set{% endblock %}
+    </title>
+    <meta name="description" content="Welcome trivia test your mind set" />
+    <meta name="keywords" content="Breath, trivia, test, your, mind, set" />
+    <meta name="author" content="Marvin Kurland" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    {% tailwind_css %}
+    <link
+      rel="stylesheet"
+      href="{% static 'font-awesome/css/font-awesome.min.css' %}"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Favicon -->
+    <link rel="icon" href="{% static 'images/favicon/favicon.ico' %}" type="image/x-icon">
+    <link rel="icon" type="image/png" href="{% static 'images/favicon/favicon-96x96.png' %}" sizes="96x96" />
+    <link rel="icon" type="image/svg+xml" href="{% static 'images/favicon/favicon.svg' %}"/>
+    <link rel="apple-touch-icon" sizes="180x180" href="{% static 'images/favicon/apple-touch-icon.png' %}" />
+    <meta name="apple-mobile-web-app-title" content="Breathe" />
+    <link rel="manifest" href="{% static 'images/favicon/site.webmanifest' %}" />
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2804671441422256"
+      crossorigin="anonymous"></script>
+  </head>
+
+  <body class="bg-backgrounds-50 font-body leading-normal tracking-normal">
+    {% block navigation %}{% include './nav.html' %}{% endblock %}
+    <main class="mx-auto w-full">{% block content %} {% endblock %}</main>
+    {% block footer %}
+      {% include './footer.html' %}
+    {% endblock %}
+    {% block scripts %}
+      <script src="https://cdn.jsdelivr.net/npm/apexcharts@3.46.0/dist/apexcharts.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/flowbite@3.1.2/dist/flowbite.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/alpinejs@3.x/dist/cdn.min.js" defer></script> 
+    {% endblock %}
+  </body>
+</html>

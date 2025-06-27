@@ -1,0 +1,24 @@
+<!--Step-4-->
+  <div class="mt-4 py-2 border-b border-b-gray-200 ">
+    <p class="text-textCl-500">
+      Please review the information you've entered. If everything looks good,
+      click "Finish" to complete your profile setup and move to your dashboard.
+    </p>
+
+    <!-- Display Profile Information Summary -->
+    <ul class="mt-4 flex flex-col gap-2 w-full">
+      <li class="mt-4 text-textCl-primary flex flex-row gap-2 justify-between py-2 w-full"><strong>Nickname:</strong> {{ form.instance.nickname }}</li>
+      <li class="mt-4 text-textCl-primary flex flex-row gap-2 justify-between py-2 w-full"><strong>First Name:</strong> {{ form.instance.first_name }}</li>
+      <li class="mt-4 text-textCl-primary flex flex-row gap-2 justify-between py-2 w-full"><strong>Last Name:</strong> {{ form.instance.last_name }}</li>
+      <li class="mt-4 text-textCl-primary flex flex-row gap-2 justify-between py-2 w-full"><strong>Phone Number:</strong> {{ form.instance.phone_number }}</li>
+      {% if form.instance.address %}
+        <li class="mt-4 text-textCl-primary flex flex-row gap-2 justify-between py-2 w-full"><strong>Address:</strong> {{ form.instance.address }}</li>
+      {% endif %}
+      {% if form.instance.date_of_birth %}
+        <li class="mt-4 text-textCl-primary flex flex-row gap-2 justify-between py-2 w-full"><strong>Date of Birth:</strong> {{ form.instance.date_of_birth }}</li>
+      {% endif %}
+      {% if form.instance.bio %}
+        <li class="mt-4 text-textCl-primary flex flex-row gap-2 justify-between py-2 w-full"><strong>Bio:</strong> {{ form.instance.bio }}</li>
+      {% endif %}
+    </ul>
+  </div>

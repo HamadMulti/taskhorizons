@@ -1,0 +1,49 @@
+<section id="testimonials" class="bg-backgrounds-50 dark:bg-backgrounds-800">
+  <div class="max-w-screen-xl px-4 py-8 mx-auto text-center lg:py-24 lg:px-6">
+    <div x-data="{
+      currentIndex: 0,
+      testimonials: [
+        { text: 'Breathe has completely changed the way we connect during gatherings! The questions spark meaningful conversations, unexpected laughter, and create unforgettable moments. It’s a must-have for any social setting!', name: 'Sarah J.', image: 'https://randomuser.me/api/portraits/women/1.jpg' },
+        { text: 'An amazing app! It has transformed the way I interact with my team, making meetings more engaging and meaningful.', name: 'John D.', image: 'https://randomuser.me/api/portraits/men/2.jpg' },
+        { text: 'Love the simplicity and the depth of the questions. This has made our family game nights so much more fun!', name: 'Emily R.', image: 'https://randomuser.me/api/portraits/women/3.jpg' },
+        { text: 'A must-have for remote teams! This app fosters great conversations and brings us closer.', name: 'Michael B.', image: 'https://randomuser.me/api/portraits/men/4.jpg' },
+        { text: 'I never expected an app to help so much with bonding. Every interaction feels meaningful!', name: 'Lisa K.', image: 'https://randomuser.me/api/portraits/women/5.jpg' }
+      ],
+      init() {
+        setInterval(() => {
+          this.currentIndex = (this.currentIndex + 1) % this.testimonials.length;
+        }, 5000);
+      }
+    }" class="relative w-full max-w-3xl mx-auto">
+      
+      <div class="overflow-hidden rounded-lg">
+        <template x-for="(testimonial, index) in testimonials" :key="index">
+          <div x-show="currentIndex === index" class="p-6 transition-opacity duration-500 ease-in-out">
+            <svg class="h-12 mx-auto mb-3 text-textCl-400 dark:text-textCl-600" viewBox="0 0 24 27" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14.017 18L14.017 10.609C14.017 4.905 17.748 1.039 23 0L23.995 2.151C21.563 3.068 20 5.789 20 8H24V18H14.017ZM0 18V10.609C0 4.905 3.748 1.038 9 0L9.996 2.151C7.563 3.068 6 5.789 6 8H9.983L9.983 18L0 18Z" fill="currentColor"/>
+            </svg>
+            <blockquote>
+              <p class="text-xl font-medium text-textCl-900 md:text-2xl dark:text-textCl-primary" x-text="testimonial.text"></p>
+            </blockquote>
+            <figcaption class="flex items-center justify-center mt-6 space-x-3">
+              <img class="w-10 h-10 rounded-full" :src="testimonial.image" alt="User avatar">
+              <div class="font-medium dark:text-textCl-primary text-textCl-600">
+                <span x-text="testimonial.name"></span>
+              </div>
+            </figcaption>
+          </div>
+        </template>
+      </div>
+
+      {% comment %} <!-- Navigation Buttons -->
+      <div class="flex justify-between absolute inset-0 items-center px-4 z-10">
+        <button @click="currentIndex = (currentIndex - 1 + testimonials.length) % testimonials.length" class="bg-gray-800 p-2 rounded-full text-white hover:bg-gray-600">
+          ❮
+        </button>
+        <button @click="currentIndex = (currentIndex + 1) % testimonials.length" class="bg-gray-800 p-2 rounded-full text-white hover:bg-gray-600">
+          ❯
+        </button>
+      </div> {% endcomment %}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,21 @@
+{% extends "dashboard_base.html" %}
+
+{% block title %}Make Payment{% endblock %}
+
+{% block content %}
+    <h1>Payment Result</h1>
+    {% if response %}
+    <p>
+      <strong>Response Description:</strong> {{ response.ResponseDescription }}
+    </p>
+    <p>
+      <strong>Merchant Request ID:</strong> {{ response.MerchantRequestID }}
+    </p>
+    <p>
+      <strong>Checkout Request ID:</strong> {{ response.CheckoutRequestID }}
+    </p>
+    {% else %}
+    <p>No response received.</p>
+    {% endif %}
+    <a href="{% url 'initiate_payment' %}">Go Back</a>
+{% endblock %}

@@ -1,0 +1,124 @@
+{% extends "../dashboard_base.html" %}
+{% block title %}Breathe | Profile Settings{% endblock %}
+{% block content %}
+<section class="bg-gray-50 py-8 antialiased dark:bg-gray-900 md:py-8">
+    <div class="mx-auto max-w-screen-lg px-4 2xl:px-0">
+        <h2 class="mb-4 text-xl font-semibold text-gray-900 dark:text-white sm:text-2xl md:mb-6 text-center">General overview</h2>
+        <div class="flex justify-center items-center border-b border-t border-gray-200 py-4 dark:border-gray-700 md:py-8">
+          <div>
+            <h3 class="mb-2 text-gray-500 dark:text-gray-400">{{ user.profile.bio|default:'Please provide a user bio to use for the games' }}</h3>
+          </div>
+        </div>
+        <div class="py-4 md:py-8">
+          <div class="mb-4 grid gap-4 sm:grid-cols-2 sm:gap-8 lg:gap-16 w-full">
+            <div class="space-y-4">
+              <div class="flex space-x-4">
+                <img class="h-16 w-16 rounded-lg" src="https://ui-avatars.com/api/?format=svg&rounded=true&name={{ user.profile.nickname|yesno:user.profile.nickname|default:user.email }}&background=random&length=1&rounded=true" alt="{{ user.username }} avatar" />
+                <div>
+                  <span class="mb-2 inline-block rounded bg-primary-100 px-2.5 py-0.5 text-xs font-medium text-primary-800 dark:bg-primary-900 dark:text-primary-300">{{ user.profile.membership_type }}</span>
+                  <h2 class="flex items-center text-xl font-bold leading-none text-gray-900 dark:text-white sm:text-2xl">{{ user.profile.nickname|yesno:user.profile.nickname|default:user.email }}</h2>
+                </div>
+              </div>
+              <dl class="">
+                <dt class="font-semibold text-gray-900 dark:text-white">First Name</dt>
+                <dd class="text-gray-500 dark:text-gray-400">{{ user.profile.first_name|default:'First Name' }}</dd>
+              </dl>
+              <dl>
+              <dl class="">
+                <dt class="font-semibold text-gray-900 dark:text-white">First Name</dt>
+                <dd class="text-gray-500 dark:text-gray-400">{{ user.profile.last_name|default:'Last Name' }}</dd>
+              </dl>
+              <dl>
+              <dl class="">
+                <dt class="font-semibold text-gray-900 dark:text-white">Email Address</dt>
+                <dd class="text-gray-500 dark:text-gray-400">{{ user.email }}</dd>
+              </dl>
+              <dl>
+                <dt class="font-semibold text-gray-900 dark:text-white">Date of Birth</dt>
+                <dd class="text-gray-500 dark:text-gray-400">{{ user.profile.date_of_birth|default:'D-O-B' }}</dd>
+              </dl>
+              <dl>
+                <dt class="font-semibold text-gray-900 dark:text-white">Address</dt>
+                <dd class="text-gray-500 dark:text-gray-400">{{ user.profile.address|default:'Address' }}</dd>
+              </dl>
+            </div>
+            <div class="space-y-4">
+              <dl>
+                <dt class="font-semibold text-gray-900 dark:text-white">Phone Number</dt>
+                <dd class="text-gray-500 dark:text-gray-400">{{ user.profile.phone_number|default:'Phone Number' }}</dd>
+              </dl>
+              <dl>
+                <dt class="font-semibold text-gray-900 dark:text-white">Email OTP</dt>
+                <dd class="text-gray-500 dark:text-gray-400">
+                  <div class="w-full flex justify-start gap-4 items-center">
+                    <form method="POST" action="{% url 'enable_email_otp' %}">
+                      {% csrf_token %}
+                      <div class="flex items-center cursor-pointer w-full">
+                        <!-- Hidden input to ensure 'False' is sent if unchecked -->
+                        <input type="hidden" name="email_otp" value="off">
+                        
+                        <input type="checkbox" name="email_otp" id="email_otp_toggle" class="sr-only peer"
+                          {% if context.email_otp_enabled %} checked {% endif %}
+                          onchange="this.form.submit()">
+                        
+                        <label for="email_otp_toggle" class="relative w-11 h-6 bg-gray-200 peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600 after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-gray-600 peer-checked:after:translate-x-full"></label>
+                        
+                        <span class="ms-3 text-sm font-medium {% if context.email_otp_enabled %} text-red-900 {% else %} text-green-900 {% endif %} dark:text-gray-300">
+                          {% if context.email_otp_enabled %} Toggle to disable {% else %} Toggle to enable {% endif %}
+                        </span>
+                      </div>
+                    </form>
+                  </div>
+                </dd>
+              </dl>
+              <dl>
+                <dt class="font-semibold text-gray-900 dark:text-white">Device OTP</dt>
+                <dd class="text-gray-500 dark:text-gray-400">
+                  <div class="w-full flex justify-start gap-4 items-center">
+                    <div class="flex items-center cursor-pointer w-full">
+                      <!-- Hidden input to ensure 'False' is sent if unchecked -->
+                      <input type="hidden" name="totp" value="off">
+                      <input type="checkbox" name="totp" id="totp_toggle" class="sr-only peer" disabled
+                        {% if context.totp_enabled %} checked {% endif %}
+                      >
+                      <label for="totp_toggle" class="relative w-11 h-6 bg-gray-200 peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:bg-blue-600 dark:peer-checked:bg-blue-600 after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:w-5 after:h-5 after:transition-all dark:border-gray-600 peer-checked:after:translate-x-full"></label>
+                    </div>
+                  </div>
+                </dd>
+              </dl>
+              <dl>
+                <dt class="mb-1 font-semibold text-gray-900 dark:text-white">Payment Methods</dt>
+                <dd class="flex items-center space-x-4 text-gray-500 dark:text-gray-400">
+                  <div class="flex h-12 w-full shrink-0 items-center justify-center rounded-lg bg-gray-100 dark:bg-gray-700 space-x-4">
+                    <img class="h-8 w-auto dark:hidden" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/brand-logos/paypal.svg" alt="" />
+                    <img class="hidden h-8 w-auto dark:flex" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/brand-logos/paypal-dark.svg" alt="" />
+                    <img class="h-8 w-auto dark:hidden" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/brand-logos/visa.svg" alt="" />
+                    <img class="hidden h-8 w-auto dark:flex" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/brand-logos/visa-dark.svg" alt="" />
+                    <img class="h-8 w-auto dark:hidden" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/brand-logos/mastercard.svg" alt="" />
+                    <img class="hidden h-8 w-auto dark:flex" src="https://flowbite.s3.amazonaws.com/blocks/e-commerce/brand-logos/mastercard-dark.svg" alt="" />
+                    <img class="h-8 w-auto dark:hidden" src="https://www.safaricom.co.ke/images/MicrosoftTeams-image_41.png" alt="" />
+                  </div>
+                </dd>
+              </dl>
+            </div>
+          </div>
+          <button type="button" data-modal-target="accountInformationModal2" data-modal-toggle="accountInformationModal2" class="inline-flex w-full items-center justify-center rounded-lg bg-primary-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-primary-800 focus:outline-none focus:ring-4 focus:ring-primary-300 dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800 sm:w-auto">
+            Edit your data
+          </button>
+          {% if not context.totp_enabled %}
+              <a href="{% url '2fa_setup' %}"
+                class="inline-flex w-full items-center justify-center rounded-lg bg-green-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800 sm:w-auto transition">
+                Enable 2FA
+              </a>
+          {% else %}
+              <a href="{% url 'disable_2fa' %}"
+                class="inline-flex w-full items-center justify-center rounded-lg bg-red-700 px-5 py-2.5 text-sm font-medium text-white hover:bg-red-800 focus:outline-none focus:ring-4 focus:ring-red-300 dark:bg-red-600 dark:hover:bg-red-700 dark:focus:ring-red-800 sm:w-auto transition">
+                  Disable 2FA
+              </a>
+          {% endif %}
+        </div>
+      </div>
+      <!-- Account Information Modal -->
+      {% include './profile_modal.html' %}
+  </section>
+{% endblock %}

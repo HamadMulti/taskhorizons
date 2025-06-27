@@ -1,0 +1,50 @@
+{% load static %}
+<section
+  id="hero"
+  class="relative bg-center bg-no-repeat bg-gray-700 z-0 bg-blend-multiply top-0"
+  style=" background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.3)), url('{% static 'images/bg/bg.png' %}')"
+>
+  <div class="px-4 mx-auto max-w-screen-xl text-center py-24 lg:py-56 z-30">
+    <h1
+      class="mb-4 text-4xl font-extrabold tracking-tight leading-none text-textCl-200 md:text-5xl lg:text-6xl"
+    >
+      Break the Silence. Spark the Fun. Keep the Vibes Alive!
+    </h1>
+    <p
+      class="mb-8 text-lg font-normal text-textCl-300 lg:text-xl sm:px-16 lg:px-48"
+    >
+    Tired of awkward silences?<br/>Breathe is the ultimate question game designed to keep the conversation flowing fun, deep, or hilariously random! No cards, no setup just endless entertainment at your fingertips.
+    </p>
+    <div
+      class="flex flex-col space-y-4 sm:flex-row sm:justify-center sm:space-y-0"
+    >
+      <a
+        href="{% url 'register' %}"
+        class="inline-flex justify-center items-center py-3 px-5 text-base font-medium text-center text-textCl-primary rounded-lg bg-btns-600 hover:bg-btns-700 focus:ring-4 focus:ring-btns-300 dark:focus:ring-btns-900"
+      >
+        Start Playing Now
+        <svg
+          class="w-3.5 h-3.5 ms-2 rtl:rotate-180"
+          aria-hidden="true"
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 14 10"
+        >
+          <path
+            stroke="currentColor"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            d="M1 5h12m0 0L9 1m4 4L9 9"
+          />
+        </svg>
+      </a>
+      <a
+        href="#features"
+        class="inline-flex justify-center items-center py-3 px-5 sm:ms-4 text-base font-medium text-center text-textCl-300 rounded-lg border border-btns-500 hover:text-btns-900 hover:bg-btns-100 focus:ring-4 focus:ring-btns-400"
+      >
+        Learn More
+      </a>
+    </div>
+  </div>
+</section>
