@@ -1,14 +1,7 @@
-# Breathe_x
+# Task Horizon
 
 ### Directory
 ```bash
-├── access_control
-│   ├── admin.py
-│   ├── apps.py
-│   ├── __init__.py
-│   ├── models.py
-│   ├── tests.py
-│   └── views.py
 ├── accounts
 │   ├── admin.py
 │   ├── apps.py
@@ -18,17 +11,6 @@
 │   ├── models.py
 │   ├── templatetags
 │   │   └── custom_filters.py
-│   ├── tests.py
-│   ├── urls.py
-│   └── views.py
-├── content
-│   ├── admin.py
-│   ├── apps.py
-│   ├── __init__.py
-│   ├── management
-│   │   └── commands
-│   │       └── create_admin.py
-│   ├── models.py
 │   ├── tests.py
 │   ├── urls.py
 │   └── views.py
@@ -98,7 +80,6 @@
 │       └── two_factor
 │           └── _base.html
 ├── .gitignore
-├── instasend_webhook.log
 ├── landing
 │   ├── admin.py
 │   ├── apps.py
@@ -112,23 +93,6 @@
 │   └── profile_pictures
 │       └── me-pic.jpg
 ├── mock_callback.json
-├── payments
-│   ├── admin.py
-│   ├── apps.py
-│   ├── celery.py
-│   ├── forms.py
-│   ├── __init__.py
-│   ├── managment
-│   │   └── commands
-│   │       └── mpesa_test_stk_push.py
-│   ├── models.py
-│   ├── services.py
-│   ├── signals.py
-│   ├── tasks.py
-│   ├── tests.py
-│   ├── urls.py
-│   ├── utils.py
-│   └── views.py
 ├── README.md
 ├── requirements.txt
 ├── settings
