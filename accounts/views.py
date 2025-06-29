@@ -5,9 +5,9 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
 from django.views.decorators.csrf import csrf_protect
 from accounts.models import Profile
-from payments.utils import async_send_mail
+from accounts.utils import async_send_mail
 from .forms import AccountInfoForm, CustomUserCreationForm, PasswordChangeForm, ReviewForm, SocialAccountsForm, UserInfoForm, UserProfileUpdateForm
-from django.http import  JsonResponse
+from django.http import JsonResponse
 from django.utils.timezone import now
 from django_otp.plugins.otp_email.models import EmailDevice  # type: ignore
 from django.conf import settings
@@ -38,63 +38,72 @@ def register_view(request):
     return render(request, "auth/register.html", {"form": form})
 
 
-def login_view(request):
+def login_view(request):  # sourcery skip: low-code-quality
     if request.user.is_authenticated:
         return redirect("dashboard")
     if request.method == "POST":
         form = AuthenticationForm(data=request.POST)
         if form.is_valid():
-            user = form.get_user()
-            has_totp = TOTPDevice.objects.filter(
-                user=user, confirmed=True).exists()
-            has_email_otp = EmailDevice.objects.filter(
-                user=user, confirmed=True).exists()
-
-            if not user.has_active_session():
-                user.set_session_expiration()
-
-            login(request, user)
-            profile = Profile.objects.filter(user=user).first()
-            nickname = profile.nickname if profile else None
-            first_name = profile.first_name if profile else None
-            last_name = profile.last_name if profile else None
-            async_send_mail(
-                "Login Notification",
-                f"You have logged in successfully.\n\nIf this wasn't you, please contact support.\nFor security, we recommend enabling 2FA.\nFrom Device: {request.META.get('HTTP_USER_AGENT', 'Unknown')} | IP: {request.META.get('REMOTE_ADDR', 'Unknown')}",
-                settings.DEFAULT_FROM_EMAIL,
-                user.email,
-            )
-
-            if has_email_otp:
-                device = EmailDevice.objects.filter(
-                    user=user, confirmed=True).first()
-                if device:
-                    code = device.generate_challenge()
-                    async_send_mail(
-                        "Your OTP Code",
-                        f"Your OTP code is: {code}",
-                        settings.DEFAULT_FROM_EMAIL,
-                        user.email,
-                    )
-                    messages.info(
-                        request, "An OTP has been sent to your email.")
-                    return redirect("verify_email_otp")
-
-            if user.is_staff and not (has_totp or has_email_otp):
-                return redirect("/admin")
-            if has_totp:
-                return redirect("verify_email_otp")
-            return redirect("profile_onboarding") if not (nickname and first_name and last_name) else redirect("dashboard")
+            return _login_view(form, request)
     else:
         form = AuthenticationForm()
 
     return render(request, "auth/login.html", {"form": form})
 
 
+def _login_view(form, request):
+    user = form.get_user()
+    has_totp = TOTPDevice.objects.filter(
+        user=user, confirmed=True).exists()
+    has_email_otp = EmailDevice.objects.filter(
+        user=user, confirmed=True).exists()
+
+    if not user.has_active_session():
+        user.set_session_expiration()
+
+    login(request, user)
+    profile = Profile.objects.filter(user=user).first()
+    nickname = profile.nickname if profile else None
+    first_name = profile.first_name if profile else None
+    last_name = profile.last_name if profile else None
+    async_send_mail(
+        "Login Notification",
+        f"You have logged in successfully.\n\nIf this wasn't you, please contact support.\nFor security, we recommend enabling 2FA.\nFrom Device: {request.META.get('HTTP_USER_AGENT', 'Unknown')} | IP: {request.META.get('REMOTE_ADDR', 'Unknown')}",
+        settings.DEFAULT_FROM_EMAIL,
+        user.email,
+    )
+
+    if has_email_otp:
+        device = EmailDevice.objects.filter(
+            user=user, confirmed=True).first()
+        if device:
+            code = device.generate_challenge()
+            async_send_mail(
+                "Your OTP Code",
+                f"Your OTP code is: {code}",
+                settings.DEFAULT_FROM_EMAIL,
+                user.email,
+            )
+            messages.info(
+                request, "An OTP has been sent to your email.")
+            return redirect("verify_email_otp")
+
+    if user.is_staff and not has_totp and not has_email_otp:
+        return redirect("/admin")
+    if has_totp:
+        return redirect("verify_email_otp")
+    return (
+        redirect("profile_onboarding")
+        if not nickname or not first_name or not last_name
+        else redirect("dashboard")
+    )
+
+
 @login_required
 def logout_view(request):
     logout(request)
     return redirect("login")
+
 
 @login_required
 def admin_view(request):
@@ -156,7 +165,7 @@ def save_profile_step(profile, cleaned_data, step):
 
 
 @login_required
-def profile_onboarding(request):
+def profile_onboarding(request):  # sourcery skip: low-code-quality
     user = request.user
     profile, _ = Profile.objects.get_or_create(user=user)
 
@@ -305,7 +314,7 @@ def verify_otp(request):
             else:
                 messages.error(request, "Invalid OTP. Try again.")
                 return render(request, template, {"totp_enabled": device_otp})
-        except:
+        except Exception:
             messages.error(request, "Invalid OTP. Please try again.")
             return render(request, template, {"totp_enabled": device_otp})
         messages.success(request, success_message)
@@ -387,7 +396,7 @@ def reset_password(request, uidb64, token):
             return redirect("login")
 
         return render(request, "auth/password_reset_confirm.html", {"valid": True})
-    except:
+    except Exception:
         return render(request, "auth/password_reset_confirm.html", {"valid": False})
 
 # Change Password (For logged-in users)

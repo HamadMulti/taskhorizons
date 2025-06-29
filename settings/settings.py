@@ -22,9 +22,6 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'tailwind',
     'accounts',
-    'payments.apps.PaymentsConfig',
-    # 'payments',
-    'content',
     "allauth",
     "allauth.account",
     "allauth.socialaccount",
@@ -38,7 +35,6 @@ INSTALLED_APPS = [
     'frontend',
     'channels',
     'corsheaders',
-    "access_control",
     "crispy_forms",
 ]
 
@@ -54,7 +50,6 @@ MIDDLEWARE = [
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django_otp.middleware.OTPMiddleware',
     'django_browser_reload.middleware.BrowserReloadMiddleware',
-    'accounts.middleware.SessionExpirationMiddleware',
     "accounts.middleware.LastSeenMiddleware",
     "accounts.middleware.EnforceAdmin2FAMiddleware",
     'corsheaders.middleware.CorsMiddleware',
