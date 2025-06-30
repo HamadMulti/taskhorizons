@@ -1,6 +1,6 @@
 # TaskHorizons
 
-**TaskHorizons** is a modern, full-featured task and project management platform built with **Django** and **TailwindCSS**. It offers seamless user authentication, robust task tracking, productivity analytics, and an intuitive UI—all designed for teams and individuals who want to get things done efficiently.
+**TaskHorizons** is a modern, full-featured task and project management platform built with **Django** and **TailwindCSS**. It offers seamless user authentication, robust task tracking, productivity analytics, and an intuitive UI all designed for teams and individuals who want to get things done efficiently.
 
 ## Project Structure
 ```bash
@@ -172,7 +172,7 @@ taskhorizons/
 ### Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/taskhorizons.git
+git clone git@github.com:HamadMulti/taskhorizons.git
 cd taskhorizons
 ```
 
