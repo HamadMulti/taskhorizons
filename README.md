@@ -2,6 +2,7 @@
 
 ### Directory
 ```bash
+taskhorizons/
 ├── accounts
 │   ├── admin.py
 │   ├── apps.py
@@ -13,8 +14,17 @@
 │   │   └── custom_filters.py
 │   ├── tests.py
 │   ├── urls.py
+│   ├── utils.py
+│   └── views.py
+├── dashboard
+│   ├── apps.py
+│   ├── __init__.py
+│   ├── tests.py
+│   ├── urls.py
 │   └── views.py
 ├── db.sqlite3
+├── Dockerfile
+├── .dockerignore
 ├── .env
 ├── frontend
 │   ├── apps.py
@@ -51,17 +61,12 @@
 │       ├── base.html
 │       ├── _base_two.html
 │       ├── breadcrumb.html
-│       ├── content
-│       │   ├── category_list.html
-│       │   ├── content.html
+│       ├── dashboard
 │       │   ├── dashboard.html
-│       │   ├── locked.html
-│       │   ├── no_questions.html
-│       │   └── question.html
+│       │   └── index.html
 │       ├── dashboard_base.html
 │       ├── footer.html
 │       ├── landing
-│       │   ├── contcatus.html
 │       │   ├── cta.html
 │       │   ├── features.html
 │       │   ├── hero.html
@@ -69,14 +74,17 @@
 │       │   └── testimonials.html
 │       ├── nav.html
 │       ├── navigation.html
-│       ├── payments
-│       │   ├── initiate_payment.html
-│       │   ├── payment_failure.html
-│       │   ├── payment_result.html
-│       │   ├── payment_success.html
-│       │   └── transaction_list.html
+│       ├── projects
+│       │   ├── project_confirm_delete.html
+│       │   ├── project_form.html
+│       │   └── project_list.html
 │       ├── registration
 │       │   └── password_reset_email.html
+│       ├── tasks
+│       │   ├── task_confirm_delete.html
+│       │   ├── task_detail.html
+│       │   ├── task_form.html
+│       │   └── task_list.html
 │       └── two_factor
 │           └── _base.html
 ├── .gitignore
@@ -91,8 +99,15 @@
 ├── manage.py
 ├── media
 │   └── profile_pictures
-│       └── me-pic.jpg
-├── mock_callback.json
+├── project
+│   ├── admin.py
+│   ├── apps.py
+│   ├── forms.py
+│   ├── __init__.py
+│   ├── models.py
+│   ├── tests.py
+│   ├── urls.py
+│   └── views.py
 ├── README.md
 ├── requirements.txt
 ├── settings
@@ -102,8 +117,14 @@
 │   ├── settings.py
 │   ├── urls.py
 │   └── wsgi.py
-├── staticfiles
-├── .vscode
-│   └── settings.json
+├── task
+│   ├── admin.py
+│   ├── apps.py
+│   ├── forms.py
+│   ├── __init__.py
+│   ├── models.py
+│   ├── tests.py
+│   ├── urls.py
+│   └── views.py
 └── webhook.log
 ```
