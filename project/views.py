@@ -7,7 +7,7 @@ from .forms import ProjectForm
 def projects_list(request):
     """List all projects for the user."""
     projects = Project.objects.filter(user=request.user).order_by("-created_at")
-    return render(request, "projects/projects_list.html", {"projects": projects})
+    return render(request, "projects/project_list.html", {"projects": projects})
 
 @login_required
 def add_project(request):
@@ -18,7 +18,7 @@ def add_project(request):
             project = form.save(commit=False)
             project.user = request.user
             project.save()
-            return redirect("projects:projects_list")
+            return redirect("projects:project_list")
     else:
         form = ProjectForm()
     
@@ -33,7 +33,7 @@ def edit_project(request, project_id):
         form = ProjectForm(request.POST, instance=project)
         if form.is_valid():
             form.save()
-            return redirect("projects:projects_list")
+            return redirect("projects:project_list")
     else:
         form = ProjectForm(instance=project)
     
@@ -45,6 +45,6 @@ def delete_project(request, project_id):
     project = get_object_or_404(project, id=project_id, user=request.user)
     if request.method == "POST":
         project.delete()
-        return redirect("projects:projects_list")
+        return redirect("projects:project_list")
     
     return render(request, "projects/project_confirm_delete.html", {"project": project})

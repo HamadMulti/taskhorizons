@@ -30,16 +30,15 @@
   <div
     class="overflow-y-auto py-5 px-3 h-full bg-white border-r border-gray-200 dark:bg-gray-800 dark:border-gray-700"
   >
-  <a
+    <a
       href="{% url 'landing_page' %}"
       class="flex items-center mb-6 text-2xl font-semibold text-logo-600 dark:text-white"
     >
       <img
-        class="w-8 h-8 mr-2"
+        class="h-8"
         src="{% static 'images/logo/logo.png' %}"
         alt="TaskHorizon"
       />
-      TaskHorizon
     </a>
     <ul class="space-y-2">
       <li>
@@ -60,72 +59,9 @@
           <span class="ml-3">Overview</span>
         </a>
       </li>
-      {% comment %} <li>
-        <a
-          href="{% url 'initiate_payment' %}"
-          class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white {% if request.resolver_match.url_name == 'initiate_payment' %}bg-gray-200{% else %}hover:bg-gray-100 dark:hover:bg-gray-700{% endif %} group"
-        >
-          <svg
-            class="iconify iconify--noto w-6 h-6 text-gray-400 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-            viewBox="0 0 128 128"
-            xmlns="http://www.w3.org/2000/svg"
-            xmlns:xlink="http://www.w3.org/1999/xlink"
-            aria-hidden="true"
-            role="img"
-            preserveAspectRatio="xMidYMid meet"
-            fill="#000000"
-          >
-            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-            <g
-              id="SVGRepo_tracerCarrier"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            ></g>
-            <g id="SVGRepo_iconCarrier">
-              <g fill="none">
-                <path
-                  d="M93.46 39.45c6.71-1.49 15.45-8.15 16.78-11.43c.78-1.92-3.11-4.92-4.15-6.13c-2.38-2.76-1.42-4.12-.5-7.41c1.05-3.74-1.44-7.87-4.97-9.49s-7.75-1.11-11.3.47c-3.55 1.58-6.58 4.12-9.55 6.62c-2.17-1.37-5.63-7.42-11.23-3.49c-3.87 2.71-4.22 8.61-3.72 13.32c1.17 10.87 3.85 16.51 8.9 18.03c6.38 1.92 13.44.91 19.74-.49z"
-                  fill="#FFCA28"
-                ></path>
-                <path
-                  d="M104.36 8.18c-.85 14.65-15.14 24.37-21.92 28.65l4.4 3.78s2.79.06 6.61-1.16c6.55-2.08 16.12-7.96 16.78-11.43c.97-5.05-4.21-3.95-5.38-7.94c-.61-2.11 2.97-6.1-.49-11.9zm-24.58 3.91s-2.55-2.61-4.44-3.8c-.94 1.77-1.61 3.69-1.94 5.67c-.59 3.48 0 8.42 1.39 12.1c.22.57 1.04.48 1.13-.12c1.2-7.91 3.86-13.85 3.86-13.85z"
-                  fill="#E2A610"
-                ></path>
-                <path
-                  d="M61.96 38.16S30.77 41.53 16.7 68.61c-14.07 27.08-2.11 43.5 10.55 49.48c12.66 5.98 44.56 8.09 65.31 3.17s25.94-15.12 24.97-24.97c-1.41-14.38-14.77-23.22-14.77-23.22s.53-17.76-13.25-29.29c-12.23-10.24-27.55-5.62-27.55-5.62z"
-                  fill="#FFCA28"
-                ></path>
-                <path
-                  d="M74.76 83.73c-6.69-8.44-14.59-9.57-17.12-12.6c-1.38-1.65-2.19-3.32-1.88-5.39c.33-2.2 2.88-3.72 4.86-4.09c2.31-.44 7.82-.21 12.45 4.2c1.1 1.04.7 2.66.67 4.11c-.08 3.11 4.37 6.13 7.97 3.53c3.61-2.61.84-8.42-1.49-11.24c-1.76-2.13-8.14-6.82-16.07-7.56c-2.23-.21-11.2-1.54-16.38 8.31c-1.49 2.83-2.04 9.67 5.76 15.45c1.63 1.21 10.09 5.51 12.44 8.3c4.07 4.83 1.28 9.08-1.9 9.64c-8.67 1.52-13.58-3.17-14.49-5.74c-.65-1.83.03-3.81-.81-5.53c-.86-1.77-2.62-2.47-4.48-1.88c-6.1 1.94-4.16 8.61-1.46 12.28c2.89 3.93 6.44 6.3 10.43 7.6c14.89 4.85 22.05-2.81 23.3-8.42c.92-4.11.82-7.67-1.8-10.97z"
-                  fill="#ec4899"
-                ></path>
-                <path
-                  d="M71.16 48.99c-12.67 27.06-14.85 61.23-14.85 61.23"
-                  stroke="#ec4899"
-                  stroke-width="5"
-                  stroke-miterlimit="10"
-                ></path>
-                <path
-                  d="M81.67 31.96c8.44 2.75 10.31 10.38 9.7 12.46c-.73 2.44-10.08-7.06-23.98-6.49c-4.86.2-3.45-2.78-1.2-4.5c2.97-2.27 7.96-3.91 15.48-1.47z"
-                  fill="#db2777"
-                ></path>
-                <path
-                  d="M81.67 31.96c8.44 2.75 10.31 10.38 9.7 12.46c-.73 2.44-10.08-7.06-23.98-6.49c-4.86.2-3.45-2.78-1.2-4.5c2.97-2.27 7.96-3.91 15.48-1.47z"
-                  fill="#ec4899"
-                ></path>
-                <path
-                  d="M96.49 58.86c1.06-.73 4.62.53 5.62 7.5c.49 3.41.64 6.71.64 6.71s-4.2-3.77-5.59-6.42c-1.75-3.35-2.43-6.59-.67-7.79z"
-                  fill="#E2A610"
-                ></path>
-              </g>
-            </g>
-          </svg>
-          <span class="ml-3">Make Payments</span>
-        </a>
-      </li> {% endcomment %}
       <li>
         <a
-          href="{% url 'transaction_list' %}"
+          href="{% url 'projects:project_list' %}"
           class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white {% if request.resolver_match.url_name == 'transaction_list' %}bg-gray-200{% else %}hover:bg-gray-100 dark:hover:bg-gray-700{% endif %} group"
         >
           <svg
@@ -211,7 +147,233 @@
               </g>
             </g>
           </svg>
-          <span class="ml-3">Transaction History</span>
+          <span class="ml-3">Project</span>
+        </a>
+      </li>
+      <li>
+        <a
+          href="{% url 'tasks:task_list' %}"
+          class="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+        >
+          <svg
+            aria-hidden="true"
+            class="w-6 h-6 text-gray-400 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+            version="1.1"
+            id="Layer_1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            viewBox="0 0 508 508"
+            xml:space="preserve"
+            fill="currentColor"
+            stroke="currentColor"
+          >
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g
+              id="SVGRepo_tracerCarrier"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></g>
+            <g id="SVGRepo_iconCarrier">
+              <circle style="fill: #65a30d" cx="254" cy="254" r="254"></circle>
+              <path
+                style="fill: #ced5e0"
+                d="M388,410.7H120c-1.7,0-3-1.4-3-3V100.4c0-1.7,1.4-3,3-3h268c1.7,0,3,1.4,3,3v307.3 C391,409.3,389.7,410.7,388,410.7z"
+              ></path>
+              <path
+                style="fill: #ffffff"
+                d="M117,109.4v289.2c0,6.7,5.4,12,12,12h214v-36c0-6.6,5.4-12,12-12h36V109.4c0-6.7-5.4-12-12-12H129 C122.3,97.3,117,102.7,117,109.4z"
+              ></path>
+              <path
+                style="fill: #e6e9ee"
+                d="M343,410.7l48-48h-36c-6.6,0-12,5.4-12,12V410.7z"
+              ></path>
+              <rect
+                x="129.3"
+                y="110.8"
+                style="fill: #ced5e0"
+                width="16.1"
+                height="7.5"
+              ></rect>
+              <rect
+                x="132.3"
+                y="82.3"
+                style="fill: #324a5e"
+                width="10.1"
+                height="32.3"
+              ></rect>
+              <rect
+                x="162.6"
+                y="110.8"
+                style="fill: #ced5e0"
+                width="16.1"
+                height="7.5"
+              ></rect>
+              <rect
+                x="165.6"
+                y="82.3"
+                style="fill: #324a5e"
+                width="10.1"
+                height="32.3"
+              ></rect>
+              <rect
+                x="196"
+                y="110.8"
+                style="fill: #ced5e0"
+                width="16.1"
+                height="7.5"
+              ></rect>
+              <rect
+                x="198.9"
+                y="82.3"
+                style="fill: #324a5e"
+                width="10.1"
+                height="32.3"
+              ></rect>
+              <rect
+                x="229.3"
+                y="110.8"
+                style="fill: #ced5e0"
+                width="16.1"
+                height="7.5"
+              ></rect>
+              <rect
+                x="232.3"
+                y="82.3"
+                style="fill: #324a5e"
+                width="10.1"
+                height="32.3"
+              ></rect>
+              <rect
+                x="262.6"
+                y="110.8"
+                style="fill: #ced5e0"
+                width="16.1"
+                height="7.5"
+              ></rect>
+              <rect
+                x="265.6"
+                y="82.3"
+                style="fill: #324a5e"
+                width="10.1"
+                height="32.3"
+              ></rect>
+              <rect
+                x="296"
+                y="110.8"
+                style="fill: #ced5e0"
+                width="16.1"
+                height="7.5"
+              ></rect>
+              <rect
+                x="298.9"
+                y="82.3"
+                style="fill: #324a5e"
+                width="10.1"
+                height="32.3"
+              ></rect>
+              <rect
+                x="329.3"
+                y="110.8"
+                style="fill: #ced5e0"
+                width="16.1"
+                height="7.5"
+              ></rect>
+              <rect
+                x="332.3"
+                y="82.3"
+                style="fill: #324a5e"
+                width="10.1"
+                height="32.3"
+              ></rect>
+              <rect
+                x="362.6"
+                y="110.8"
+                style="fill: #ced5e0"
+                width="16.1"
+                height="7.5"
+              ></rect>
+              <rect
+                x="365.6"
+                y="82.3"
+                style="fill: #324a5e"
+                width="10.1"
+                height="32.3"
+              ></rect>
+              <g>
+                <path
+                  style="fill: #e6e9ee"
+                  d="M177,214.4h-31.1c-4.1,0-7.5-3.4-7.5-7.5v-31.1c0-4.1,3.4-7.5,7.5-7.5H177c4.1,0,7.5,3.4,7.5,7.5 V207C184.4,211.1,181.1,214.4,177,214.4z M146.4,206.5h30.2v-30.2h-30.2V206.5z"
+                ></path>
+                <path
+                  style="fill: #e6e9ee"
+                  d="M177,288.7h-31.1c-4.1,0-7.5-3.4-7.5-7.5v-31.1c0-4.1,3.4-7.5,7.5-7.5H177c4.1,0,7.5,3.4,7.5,7.5 v31.1C184.4,285.3,181.1,288.7,177,288.7z M146.4,280.7h30.2v-30.2h-30.2V280.7z"
+                ></path>
+                <path
+                  style="fill: #e6e9ee"
+                  d="M177,362.9h-31.1c-4.1,0-7.5-3.4-7.5-7.5v-31.1c0-4.1,3.4-7.5,7.5-7.5H177c4.1,0,7.5,3.4,7.5,7.5 v31.1C184.4,359.5,181.1,362.9,177,362.9z M146.4,355h30.2v-30.2h-30.2V355z"
+                ></path>
+              </g>
+              <g>
+                <path
+                  style="fill: #ff7058"
+                  d="M159.5,198.3c0.7,0.9,1.7,1.5,2.9,1.6c0.1,0,0.2,0,0.3,0c1.1,0,2.1-0.4,2.8-1.2l41.1-41.1 c1.6-1.6,1.6-4.1,0-5.6c-1.6-1.6-4.1-1.6-5.6,0l-37.9,37.9l-5.6-7.7c-1.3-1.8-3.8-2.2-5.5-0.9c-1.8,1.3-2.1,3.8-0.9,5.5 L159.5,198.3z"
+                ></path>
+                <path
+                  style="fill: #ff7058"
+                  d="M201,226.2l-37.9,37.9l-5.6-7.7c-1.3-1.8-3.8-2.2-5.5-0.9c-1.8,1.3-2.1,3.8-0.9,5.5l8.4,11.4 c0.7,0.9,1.7,1.5,2.9,1.6c0.1,0,0.2,0,0.3,0c1.1,0,2.1-0.4,2.8-1.2l41.1-41.1c1.6-1.6,1.6-4.1,0-5.6 C205.1,224.7,202.6,224.7,201,226.2z"
+                ></path>
+                <path
+                  style="fill: #ff7058"
+                  d="M201,300.5l-37.9,37.9l-5.6-7.7c-1.3-1.8-3.8-2.2-5.5-0.9c-1.8,1.3-2.1,3.8-0.9,5.5l8.4,11.4 c0.7,0.9,1.7,1.5,2.9,1.6c0.1,0,0.2,0,0.3,0c1.1,0,2.1-0.4,2.8-1.2l41.1-41.1c1.6-1.6,1.6-4.1,0-5.6 C205.1,298.9,202.6,298.9,201,300.5z"
+                ></path>
+              </g>
+              <g>
+                <rect
+                  x="216.6"
+                  y="175.4"
+                  style="fill: #84dbff"
+                  width="116.9"
+                  height="9.1"
+                ></rect>
+                <rect
+                  x="216.6"
+                  y="198.4"
+                  style="fill: #84dbff"
+                  width="70.6"
+                  height="9.1"
+                ></rect>
+                <rect
+                  x="216.6"
+                  y="249.6"
+                  style="fill: #84dbff"
+                  width="116.9"
+                  height="9.1"
+                ></rect>
+                <rect
+                  x="216.6"
+                  y="272.6"
+                  style="fill: #84dbff"
+                  width="70.6"
+                  height="9.1"
+                ></rect>
+                <rect
+                  x="216.6"
+                  y="323.8"
+                  style="fill: #84dbff"
+                  width="116.9"
+                  height="9.1"
+                ></rect>
+                <rect
+                  x="216.6"
+                  y="346.8"
+                  style="fill: #84dbff"
+                  width="70.6"
+                  height="9.1"
+                ></rect>
+              </g>
+            </g>
+          </svg>
+          <span class="ml-3">Tasks</span>
         </a>
       </li>
     </ul>
