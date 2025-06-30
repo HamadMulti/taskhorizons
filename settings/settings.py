@@ -27,7 +27,7 @@ INSTALLED_APPS = [
     "allauth.socialaccount",
     "allauth.socialaccount.providers.google",
     "allauth.socialaccount.providers.github",
-    'django_browser_reload',
+    # 'django_browser_reload',
     'django_otp',
     'django_otp.plugins.otp_totp',
     'two_factor',
@@ -52,7 +52,7 @@ MIDDLEWARE = [
     "allauth.account.middleware.AccountMiddleware",
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django_otp.middleware.OTPMiddleware',
-    'django_browser_reload.middleware.BrowserReloadMiddleware',
+    # 'django_browser_reload.middleware.BrowserReloadMiddleware',
     "accounts.middleware.LastSeenMiddleware",
     "accounts.middleware.EnforceAdmin2FAMiddleware",
     'corsheaders.middleware.CorsMiddleware',
@@ -90,11 +90,7 @@ DEFAULT_FROM_EMAIL=os.getenv('EMAIL_HOST_USER')
 
 PAYMENT_EXPIRY_HOURS = 12
 
-CELERY_BROKER_URL = os.getenv('CELERY_BROKER_URL', 'redis://localhost:6379/0')
-
-
 MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
-
 
 TEMPLATES = [
     {
@@ -114,18 +110,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'settings.wsgi.application'
-
 ASGI_APPLICATION = "settings.asgi.application"
-
-# CHANNEL_LAYERS = {
-#     "default": {
-#         "BACKEND": "channels_redis.core.RedisChannelLayer",
-#         "CONFIG": {
-#             "hosts": [("127.0.0.1", 6379)],
-#         },
-#     },
-# }
-
 
 DATABASES = {
     'default': {
@@ -201,25 +186,6 @@ EMAIL_USE_TLS = False
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL = os.getenv('EMAIL_HOST_USER')
-
-
-# Mpesa Credentials
-MPESA_CONSUMER_KEY = os.getenv('MPESA_CONSUMER_KEY')
-MPESA_CONSUMER_SECRET = os.getenv('MPESA_CONSUMER_SECRET')
-MPESA_LIPA_SHORTCODE = os.getenv('MPESA_LIPA_SHORTCODE')
-MPESA_LIPA_PASSWORD = os.getenv('MPESA_LIPA_PASSWORD')
-MPESA_CALLBACK_URL = os.getenv('MPESA_CALLBACK_URL')
-
-# Pesapal Credentials
-PESAPAL_CONSUMER_KEY = os.getenv('PESAPAL_CONSUMER_KEY')
-PESAPAL_CONSUMER_SECRET = os.getenv('PESAPAL_CONSUMER_SECRET')
-PESAPAL_NOTIFICATION_ID = os.getenv('PESAPAL_NOTIFICATION_ID')
-
-# InstantSend Credentials
-INSTASEND_API_KEY = os.getenv('INSTASEND_API_KEY')
-INSTASEND_API_KEY_PUBLIC = os.getenv('INSTASEND_API_KEY_PUBLIC')
-INSTASEND_CALLBACK_URL = os.getenv('INSTASEND_CALLBACK_URL')
-
 
 LOGGING = {
     "version": 1,
