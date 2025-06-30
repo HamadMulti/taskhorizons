@@ -1,6 +1,6 @@
-{% extends 'base.html' %} {% block title %}Breath | Register (New here sign up to see more about our features) {% endblock %} {% load static%} 
+{% extends 'base.html' %} {% block title %}TaskHorizon | Register (New here sign up to see more about our features) {% endblock %} {% load static%} 
 {% block navigation %}{% endblock %}{% block content %}
-<section class="bg-backgrounds-50 dark:bg-backgrounds-900 w-full pt-4">
+<section class="bg-gray-50 dark:bg-gray-900 w-full pt-4">
   <div
     class="flex flex-col items-center justify-center px-6 py-18 mx-auto md:h-screen lg:py-0"
   >
@@ -9,14 +9,13 @@
       class="flex items-center mb-6 text-2xl font-semibold text-logo-600 dark:text-white"
     >
       <img
-        class="w-8 h-8 mr-2"
+        class="w-22 h-8"
         src="{% static 'images/logo/logo.png' %}"
-        alt="Breath"
+        alt="TaskHorizon"
       />
-      Breathe
     </a>
     <div
-      class="w-full bg-backgrounds rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-backgrounds-800 dark:border-backgrounds-700"
+      class="w-full bg-gray-100 rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:bg-gray-800 dark:border-gray-700"
     >
       <div class="p-6 space-y-4 md:space-y-6 sm:p-8">
         <h1
@@ -45,7 +44,7 @@
               type="email"
               name="email"
               id="id_email"
-              class="bg-backgrounds-50 border border-backgrounds-300 text-textCl-900 text-sm rounded-lg focus:ring-backgrounds-600 focus:border-backgrounds-600 block w-full p-2.5 dark:bg-backgrounds-700 dark:border-backgrounds-600 dark:placeholder-backgrounds-400 dark:text-textCl-primary dark:focus:ring-backgrounds-500 dark:focus:border-backgrounds-500"
+              class="bg-gray-50 border border-gray-300 text-textCl-900 text-sm rounded-lg focus:ring-gray-600 focus:border-gray-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-textCl-primary dark:focus:ring-gray-500 dark:focus:border-gray-500"
               placeholder="Enter your email"
               required
               value="{{ form.email.value|default:'' }}"
@@ -67,7 +66,7 @@
               type="password"
               name="password1"
               id="id_password1"
-              class="bg-backgrounds-50 border border-backgrounds-300 text-textCl-900 text-sm rounded-lg focus:ring-backgrounds-600 focus:border-backgrounds-600 block w-full p-2.5 dark:bg-backgrounds-700 dark:border-backgrounds-600 dark:placeholder-backgrounds-400 dark:text-textCl-primary dark:focus:ring-backgrounds-500 dark:focus:border-backgrounds-500"
+              class="bg-gray-50 border border-gray-300 text-textCl-900 text-sm rounded-lg focus:ring-gray-600 focus:border-gray-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-textCl-primary dark:focus:ring-gray-500 dark:focus:border-gray-500"
               placeholder="••••••••"
               required
             />
@@ -90,7 +89,7 @@
               type="password"
               name="password2"
               id="id_password2"
-              class="bg-backgrounds-50 border border-backgrounds-300 text-textCl-900 text-sm rounded-lg focus:ring-backgrounds-600 focus:border-backgrounds-600 block w-full p-2.5 dark:bg-backgrounds-700 dark:border-backgrounds-600 dark:placeholder-backgrounds-400 dark:text-textCl-primary dark:focus:ring-backgrounds-500 dark:focus:border-backgrounds-500"
+              class="bg-gray-50 border border-gray-300 text-textCl-900 text-sm rounded-lg focus:ring-gray-600 focus:border-gray-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-textCl-primary dark:focus:ring-gray-500 dark:focus:border-gray-500"
               placeholder="••••••••"
               required
             />
@@ -108,7 +107,7 @@
                 id="terms"
                 aria-describedby="terms"
                 type="checkbox"
-                class="w-4 h-4 border border-backgrounds-300 rounded bg-backgrounds-50 focus:ring-3 focus:ring-backgrounds-300 dark:bg-backgrounds-700 dark:border-backgrounds-600 dark:focus:ring-backgrounds-600 dark:ring-offset-backgrounds-800"
+                class="w-4 h-4 border border-gray-300 rounded bg-gray-50 focus:ring-3 focus:ring-gray-300 dark:bg-gray-700 dark:border-gray-600 dark:focus:ring-gray-600 dark:ring-offset-gray-800"
                 required
               />
             </div>

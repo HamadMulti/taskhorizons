@@ -1,0 +1,72 @@
+{% extends "../dashboard_base.html" %}
+
+{% block content %}
+  <div class="w-full flex flex-col justify-start items-center h-screen pt-12">
+    <div
+      class="w-full max-w-4xl bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700"
+    >
+      <div class="flex justify-end w-full py-6 px-4">
+        <a href="{% url 'tasks:task_list' %}" class="flex justify-center items-center p-2 hover:text-primary-500">
+          <svg
+            class="w-4 h-4 me-2 hover:fill-primary-500"
+            aria-hidden="true"
+            fill="#000000"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+            <g
+              id="SVGRepo_tracerCarrier"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            ></g>
+            <g id="SVGRepo_iconCarrier">
+              <path
+                d="M4.70710678,16 L7.85355339,19.1464466 C8.04881554,19.3417088 8.04881554,19.6582912 7.85355339,19.8535534 C7.65829124,20.0488155 7.34170876,20.0488155 7.14644661,19.8535534 L3.14644661,15.8535534 C2.95118446,15.6582912 2.95118446,15.3417088 3.14644661,15.1464466 L7.14644661,11.1464466 C7.34170876,10.9511845 7.65829124,10.9511845 7.85355339,11.1464466 C8.04881554,11.3417088 8.04881554,11.6582912 7.85355339,11.8535534 L4.70710678,15 L18.5,15 C19.3284271,15 20,14.3284271 20,13.5 L20,7.5 C20,6.67157288 19.3284271,6 18.5,6 L3.5,6 C3.22385763,6 3,5.77614237 3,5.5 C3,5.22385763 3.22385763,5 3.5,5 L18.5,5 C19.8807119,5 21,6.11928813 21,7.5 L21,13.5 C21,14.8807119 19.8807119,16 18.5,16 L4.70710678,16 Z"
+              ></path>
+            </g>
+          </svg>
+          <span class="ml:auto">Tasks</span></a
+        >
+      </div>
+      <div
+        class="flex flex-col items-center pb-10 w-full p-4 border-b border-gray-200"
+      >
+        <h1 class="capitalize text-2xl">{{ task.title|capfirst }}</h1>
+        <h5 class="mb-1 text-md font-medium text-gray-900 dark:text-white">
+          Priority:
+        <span class="text-sm {% if task.priority == 'low' %} text-green-500 {% elif task.priority == 'medium' %} text-amber-500 {% elif task.priority == 'high' %} text-red-500 {% endif %}">{{task.priority|capfirst}}</span>
+        </h5>
+        <h5 class="mb-1 text-md font-medium text-gray-900 dark:text-white">
+          Status
+        <span class="text-sm {% if task.status == 'pending' %} text-gray-500 {% elif task.status == 'in_progress' %} text-yellow-500 {% elif task.status == 'completed' %} text-green-500 {% endif %}">{{task.status|capfirst|default:"Unknown"|cut:"_"|join:""}}</span>
+        </h5>
+        <span class="text-sm text-gray-500 dark:text-gray-400"
+          >{{ task.description }}</span
+        >
+        <h5 class="mb-1 text-md font-medium text-gray-900 dark:text-white">
+          Due Date:
+          <span class="text-sm text-gray-500 dark:text-gray-400"
+            >{{ task.due_date }}</span
+          >
+        </h5>
+        <div class="flex gap-2">
+          <a
+            href="{% url 'task:task_update' task.id %}"
+            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+            id="edit-goal"
+          >
+            Edit
+          </a>
+          <a
+            href="{% url 'task:task_delete' task.id %}"
+            class="block px-4 py-2 text-sm text-red-600 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white"
+            id="delete-goal"
+          >
+            Delete
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

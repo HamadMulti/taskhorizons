@@ -1,0 +1,122 @@
+{% extends "../dashboard_base.html" %} {% block title %} {% if form.instance.id %} Update
+Task | MindVista {% else %} Create Task | MindVista {% endif %} {% endblock %}
+{% block content %}
+<div
+  class="container mx-auto px-4 py-8 min-h-screen flex flex-col items-center"
+>
+  <div class="w-full shadow-md px-4 pb-6 rounded-md bg-white">
+    <div class="flex justify-between items-center py-8 px-4 w-full">
+      <h2 class="text-primary-600 text-2xl">
+        {% if form.instance.pk %}Edit Task{% else %}New Task{% endif %}
+      </h2>
+      <a
+        href="{% url 'tasks:task_list' %}"
+        class="no-warp flex items-center justify-center"
+      >
+        <svg
+          class="w-4 h-4 me-2 hover:fill-primary-500"
+          aria-hidden="true"
+          fill="#000000"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+          <g
+            id="SVGRepo_tracerCarrier"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></g>
+          <g id="SVGRepo_iconCarrier">
+            <path
+              d="M4.70710678,16 L7.85355339,19.1464466 C8.04881554,19.3417088 8.04881554,19.6582912 7.85355339,19.8535534 C7.65829124,20.0488155 7.34170876,20.0488155 7.14644661,19.8535534 L3.14644661,15.8535534 C2.95118446,15.6582912 2.95118446,15.3417088 3.14644661,15.1464466 L7.14644661,11.1464466 C7.34170876,10.9511845 7.65829124,10.9511845 7.85355339,11.1464466 C8.04881554,11.3417088 8.04881554,11.6582912 7.85355339,11.8535534 L4.70710678,15 L18.5,15 C19.3284271,15 20,14.3284271 20,13.5 L20,7.5 C20,6.67157288 19.3284271,6 18.5,6 L3.5,6 C3.22385763,6 3,5.77614237 3,5.5 C3,5.22385763 3.22385763,5 3.5,5 L18.5,5 C19.8807119,5 21,6.11928813 21,7.5 L21,13.5 C21,14.8807119 19.8807119,16 18.5,16 L4.70710678,16 Z"
+            ></path>
+          </g>
+        </svg>
+        <span class="ml:auto">Cancel</span></a
+      >
+    </div>
+
+    <form method="post" class="w-full">
+      {% csrf_token %} {% if form.instance.id %}
+      <input type="hidden" name="_method" value="PUT" />
+      {% endif %}
+
+      <div class="space-y-12">
+        <div class="border-b border-gray-900/10 pb-12 gap-8 py-6">
+          <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
+            <!-- Title -->
+            <div class="sm:col-span-4">
+              <label
+                for="id_title"
+                class="block text-sm font-medium text-gray-900"
+                >Task Title</label
+              >
+              <div class="mt-2">{{ form.title }}</div>
+            </div>
+          </div>
+
+          <!-- Description -->
+          <div class="mt-6">
+            <label
+              for="id_description"
+              class="block text-sm font-medium text-gray-900"
+              >Description</label
+            >
+            <div class="mt-2">{{ form.description }}</div>
+          </div>
+
+          <!-- Project -->
+          <div class="mt-6">
+            <label
+              for="id_project"
+              class="block text-sm font-medium text-gray-900"
+              >Project</label
+            >
+            <div class="mt-2">{{ form.project }}</div>
+          </div>
+
+          <!-- Due Date -->
+          <div class="mt-6">
+            <label
+              for="id_due_date"
+              class="block text-sm font-medium text-gray-900"
+              >Due Date</label
+            >
+            <div class="mt-2">{{ form.due_date }}</div>
+          </div>
+
+          <!-- Priority & Status -->
+          <div class="grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 mt-6">
+            <div class="sm:col-span-3">
+              <label
+                for="id_priority"
+                class="block text-sm font-medium text-gray-900"
+                >Priority</label
+              >
+              <div class="mt-2">{{ form.priority }}</div>
+            </div>
+            <div class="sm:col-span-3">
+              <label
+                for="id_status"
+                class="block text-sm font-medium text-gray-900"
+                >Status</label
+              >
+              <div class="mt-2">{{ form.status }}</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Submit Buttons -->
+        <div class="mt-6 flex items-center justify-end gap-x-6">
+          <button
+            type="submit"
+            class="rounded-md bg-primary-600 px-3 py-2 text-sm font-semibold text-white shadow-xs hover:bg-primary-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-600"
+          >
+            {% if form.instance.id %} Update {% else %} Create {% endif %}
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}

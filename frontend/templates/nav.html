@@ -10,15 +10,9 @@
       <a href="{% url 'landing_page' %}" class="flex items-center">
         <img
           src="{% static 'images/logo/logo.png' %}"
-          class="h-6 mr-3 sm:h-9"
-          alt="Breathe"
+          class="h-8 mr-3 sm:h-9"
+          alt="TaskHorizon"
         />
-        <span
-          id="nav-title"
-          class="self-center text-logo-600 text-xl font-semibold whitespace-nowrap transition-colors duration-300"
-        >
-          Breathe
-        </span>
       </a>
       <div class="flex items-center lg:order-2">
         {% if user.is_authenticated %}
@@ -73,7 +67,7 @@
         <div
           id="tooltip-logout"
           role="tooltip"
-          class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-textCl-primary bg-btns-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip"
+          class="inline-block absolute invisible z-10 py-2 px-3 text-sm font-medium text-textCl-50 bg-btns-900 rounded-lg shadow-sm opacity-0 transition-opacity duration-300 tooltip"
         >
           Logout
           <div class="tooltip-arrow" data-popper-arrow></div>
@@ -82,13 +76,13 @@
         <a
           id="login-btn"
           href="{% url 'login' %}"
-          class="transition-colors duration-300 px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 font-medium rounded-lg focus:ring-4 focus:outline-none"
+          class="transition-colors text-textCl-500 hover:text-textCl-700 duration-300 px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 font-medium rounded-lg focus:ring-4 focus:outline-none"
         >
           Log in
         </a>
         <a
           href="{% url 'register' %}"
-          class="text-textCl-primary bg-btns-700 hover:bg-btns-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0 dark:bg-btns-600 dark:hover:bg-btns-700 focus:outline-none dark:focus:ring-btns-800"
+          class="text-textCl-50 bg-btns-700 hover:bg-btns-800 focus:ring-4 focus:ring-primary-300 font-medium rounded-lg text-sm px-4 lg:px-5 py-2 lg:py-2.5 sm:mr-2 lg:mr-0 dark:bg-btns-600 dark:hover:bg-btns-700 focus:outline-none dark:focus:ring-btns-800"
         >
           Sign Up
         </a>
@@ -121,9 +115,9 @@
           id="nav-links"
           class="flex flex-col mt-4 font-medium lg:flex-row lg:space-x-8 lg:mt-0"
         >
-          <li><a href="#hero" class="nav-link">Home</a></li>
-          <li><a href="#features" class="nav-link">Features</a></li>
-          <li><a href="#testimonials" class="nav-link">Testimonials</a></li>
+          <li><a href="#hero" class="nav-link text-textCl-700 hover:text-textCl-700">Home</a></li>
+          <li><a href="#features" class="nav-link text-textCl-700 hover:text-textCl-700">Features</a></li>
+          <li><a href="#testimonials" class="nav-link text-textCl-700 hover:text-textCl-700">Testimonials</a></li>
         </ul>
       </div>
     </div>
@@ -138,7 +132,7 @@
 
     function handleScroll() {
       if (window.scrollY === 0) {
-        navbar.classList.remove("bg-backgrounds-50", "border-backgrounds-200", "shadow-md");
+        navbar.classList.remove("bg-gray-50", "border-gray-200", "shadow-md");
         navbar.classList.add("bg-transparent", "border-none");
         navTitle.classList.remove("text-logo-600");
         navTitle.classList.add("text-white");
@@ -161,10 +155,10 @@
       } else {
         navbar.classList.remove("bg-transparent", "border-none");
         navbar.classList.add(
-          "bg-backgrounds-50",
-          "border-backgrounds-200",
+          "bg-gray-50",
+          "border-gray-200",
           "border-b",
-          "border-backgrounds-300",
+          "border-gray-300",
           "shadow-md"
         );
         navTitle.classList.remove("text-white");

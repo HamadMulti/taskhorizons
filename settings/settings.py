@@ -36,6 +36,9 @@ INSTALLED_APPS = [
     'channels',
     'corsheaders',
     "crispy_forms",
+    'dashboard',
+    'project',
+    'task',
 ]
 
 MIDDLEWARE = [

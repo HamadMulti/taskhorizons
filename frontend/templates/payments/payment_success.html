@@ -1,9 +1,0 @@
-{% extends 'dashboard_base.html' %}
-{% block content %}
-<div class="p-6 bg-green-100 text-green-900 rounded-xl shadow">
-  <h2 class="text-2xl font-bold">Payment Successful 🎉</h2>
-  <p class="mt-2">Your payment of KES {{ amount }} was successful.</p>
-  <p class="mt-1">Transaction ID: {{ transaction_code }}</p>
-  <a href="{% url 'dashboard' %}" class="btn mt-4 bg-green-600 text-white px-4 py-2 rounded">Go to Dashboard</a>
-</div>
-{% endblock %}
