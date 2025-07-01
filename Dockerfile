@@ -33,6 +33,8 @@ RUN python manage.py makemigrations &&\
     python manage.py makemigrations django_otp &&\
     python manage.py migrate
 
+RUN python manage.py create_admin
+
 RUN python manage.py tailwind install && python manage.py tailwind build
 
 RUN mkdir -p /app/staticfiles
