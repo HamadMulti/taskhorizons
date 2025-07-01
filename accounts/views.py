@@ -32,7 +32,7 @@ def register_view(request):
                 settings.DEFAULT_FROM_EMAIL,
                 user.email,
             )
-            return redirect("profile_onboarding")
+            return redirect("dashboard")
     else:
         form = CustomUserCreationForm()
     return render(request, "auth/register.html", {"form": form})
@@ -63,9 +63,6 @@ def _login_view(form, request):
 
     login(request, user)
     profile = Profile.objects.filter(user=user).first()
-    nickname = profile.nickname if profile else None
-    first_name = profile.first_name if profile else None
-    last_name = profile.last_name if profile else None
     async_send_mail(
         "Login Notification",
         f"You have logged in successfully.\n\nIf this wasn't you, please contact support.\nFor security, we recommend enabling 2FA.\nFrom Device: {request.META.get('HTTP_USER_AGENT', 'Unknown')} | IP: {request.META.get('REMOTE_ADDR', 'Unknown')}",
@@ -92,11 +89,7 @@ def _login_view(form, request):
         return redirect("/admin")
     if has_totp:
         return redirect("verify_email_otp")
-    return (
-        redirect("profile_onboarding")
-        if not nickname or not first_name or not last_name
-        else redirect("dashboard")
-    )
+    return redirect("dashboard")
 
 
 @login_required
@@ -132,11 +125,9 @@ def profile_settings(request):
     if request.method == "POST":
         form = UserProfileUpdateForm(
             request.POST, request.FILES, instance=user)
-        print("Files in request:", request.FILES)
         if form.is_valid():
-            print("form is valid {form.cleaned_data}")
             form.save()
-            print("form saved")
+            messages.success(request, "Profile updated successfully.")
             return redirect("profile_settings")
         else:
             print(form.errors)
@@ -319,7 +310,7 @@ def verify_otp(request):
             return render(request, template, {"totp_enabled": device_otp})
         messages.success(request, success_message)
         if not (nickname and first_name and last_name):
-            return redirect("profile_onboarding")
+            return redirect("profile_settings")
         elif request.user.is_staff:
             return redirect("/admin")
         else:

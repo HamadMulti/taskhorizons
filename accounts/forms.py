@@ -1,7 +1,6 @@
 from django.contrib.auth.forms import UserCreationForm
 from django import forms
 from .models import CustomUser, Profile
-from django.utils import timezone
 
 class CustomUserCreationForm(UserCreationForm):
     email = forms.EmailField(max_length=254, required=True)
@@ -24,7 +23,7 @@ class CustomUserCreationForm(UserCreationForm):
                 "placeholder": "Confirm password",
             }),
         }
-        
+
     def clean_email(self):
         email = self.cleaned_data.get("email")
         if CustomUser.objects.filter(email=email).exists():
@@ -40,8 +39,9 @@ class CustomUserCreationForm(UserCreationForm):
         user.save()
         return user
 
-        
+
 class UserProfileUpdateForm(forms.ModelForm):
+    # Extra Profile fields
     nickname = forms.CharField(required=False)
     first_name = forms.CharField(required=False)
     last_name = forms.CharField(required=False)
@@ -49,35 +49,52 @@ class UserProfileUpdateForm(forms.ModelForm):
     address = forms.CharField(required=False)
     date_of_birth = forms.DateField(required=False, widget=forms.DateInput(attrs={'type': 'date'}))
     profile_picture = forms.ImageField(required=False)
-    bio = forms.CharField(required=False)
+    bio = forms.CharField(required=False, widget=forms.Textarea)
 
     class Meta:
         model = CustomUser
         fields = ['email']
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        if self.instance and hasattr(self.instance, 'profile'):
+            profile = self.instance.profile
+            self.fields['nickname'].initial = profile.nickname
+            self.fields['first_name'].initial = profile.first_name
+            self.fields['last_name'].initial = profile.last_name
+            self.fields['phone_number'].initial = profile.phone_number
+            self.fields['address'].initial = profile.address
+            self.fields['date_of_birth'].initial = profile.date_of_birth
+            self.fields['bio'].initial = profile.bio
+            self.fields['profile_picture'].initial = profile.profile_picture
+
     def save(self, commit=True):
         user = super().save(commit=False)
         if commit:
             user.save()
-            # Ensure Profile fields are saved too
-            profile, created = Profile.objects.get_or_create(user=user)
-            profile.nickname = self.cleaned_data.get('nickname', profile.nickname)
-            profile.first_name = self.cleaned_data.get('first_name', profile.first_name)
-            profile.last_name = self.cleaned_data.get('last_name', profile.last_name)
-            profile.phone_number = self.cleaned_data.get('phone_number', profile.phone_number)
-            profile.address = self.cleaned_data.get('address', profile.address)
-            profile.date_of_birth = self.cleaned_data.get('date_of_birth', profile.date_of_birth)
-            profile.profile_picture = self.cleaned_data.get('profile_picture', profile.profile_picture)
-            profile.bio = self.cleaned_data.get('bio', profile.bio)
-            profile.save()  # Ensure saving the profile instance
+
+            profile = user.profile  # Guaranteed to exist due to signal
+            profile.nickname = self.cleaned_data.get('nickname') or profile.nickname
+            profile.first_name = self.cleaned_data.get('first_name') or profile.first_name
+            profile.last_name = self.cleaned_data.get('last_name') or profile.last_name
+            profile.phone_number = self.cleaned_data.get('phone_number') or profile.phone_number
+            profile.address = self.cleaned_data.get('address') or profile.address
+            profile.date_of_birth = self.cleaned_data.get('date_of_birth') or profile.date_of_birth
+            profile.bio = self.cleaned_data.get('bio') or profile.bio
+
+            if self.cleaned_data.get("profile_picture"):
+                profile.profile_picture = self.cleaned_data["profile_picture"]
+
+            profile.save()
         return user
-    
+
     def clean_email(self):
         email = self.cleaned_data.get("email")
         if CustomUser.objects.exclude(pk=self.instance.pk).filter(email=email).exists():
             raise forms.ValidationError("Email already in use.")
         return email
-    
+
     def clean_nickname(self):
         nickname = self.cleaned_data.get("nickname")
         if nickname and Profile.objects.exclude(user=self.instance).filter(nickname=nickname).exists():
@@ -92,43 +109,29 @@ class UserProfileUpdateForm(forms.ModelForm):
             raise forms.ValidationError("Phone number already in use.")
         return phone_number
 
-    
     def clean_profile_picture(self):
         profile_picture = self.cleaned_data.get("profile_picture")
         if profile_picture and not profile_picture.name.endswith(('.png', '.jpg', '.jpeg')):
             raise forms.ValidationError("Profile picture must be a PNG or JPG image.")
         return profile_picture
-    
+
     def clean_bio(self):
         bio = self.cleaned_data.get("bio")
         if bio and len(bio) > 1000:
             raise forms.ValidationError("Bio cannot exceed 1000 characters.")
         return bio
 
-    
     def clean_first_name(self):
         first_name = self.cleaned_data.get("first_name")
         if len(first_name) < 2:
             raise forms.ValidationError("First name must be at least 2 characters long.")
         return first_name
-    
+
     def clean_last_name(self):
         last_name = self.cleaned_data.get("last_name")
         if len(last_name) < 2:
             raise forms.ValidationError("Last name must be at least 2 characters long.")
         return last_name
-    
-    def clean_address(self):
-        address = self.cleaned_data.get("address")
-        if len(address) < 5:
-            raise forms.ValidationError("Address must be at least 5 characters long.")
-        return address
-    
-    def clean_date_of_birth(self):
-        date_of_birth = self.cleaned_data.get("date_of_birth")
-        if date_of_birth and date_of_birth > timezone.now().date():
-            raise forms.ValidationError("Date of birth cannot be in the future.")
-        return date_of_birth
 
 
 class UserInfoForm(forms.ModelForm):
