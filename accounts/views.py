@@ -87,7 +87,7 @@ def _login_view(form, request):
 
     if user.is_staff and not has_totp and not has_email_otp:
         return redirect("/admin")
-    if has_totp:
+    if has_totp or has_email_otp:
         return redirect("verify_email_otp")
     return redirect("dashboard")
 
