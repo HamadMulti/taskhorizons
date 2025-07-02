@@ -9,7 +9,7 @@ class Command(BaseCommand):
         User = get_user_model()
 
         admin_email = os.getenv("ADMIN_EMAIL", "taskhorizonapp@gmail.com")
-        admin_password = os.getenv("ADMIN_PASSWORD", "hamad@123@")
+        admin_password = os.getenv("ADMIN_PASSWORD", "hamads@123@taskhorizon")
 
         if not User.objects.filter(is_superuser=True).exists():
             User.objects.create_superuser(
