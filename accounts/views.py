@@ -85,7 +85,7 @@ def _login_view(form, request):
                 request, "An OTP has been sent to your email.")
             return redirect("verify_email_otp")
 
-    if user.is_staff and not has_totp and not has_email_otp:
+    if user.is_staff:
         return redirect("/admin")
     if has_totp or has_email_otp:
         return redirect("verify_email_otp")

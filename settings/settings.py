@@ -54,7 +54,7 @@ MIDDLEWARE = [
     'django_otp.middleware.OTPMiddleware',
     # 'django_browser_reload.middleware.BrowserReloadMiddleware',
     "accounts.middleware.LastSeenMiddleware",
-    "accounts.middleware.EnforceAdmin2FAMiddleware",
+    # "accounts.middleware.EnforceAdmin2FAMiddleware",
     'corsheaders.middleware.CorsMiddleware',
 ]
 

@@ -2,16 +2,7 @@ from django.shortcuts import redirect
 from django_otp.plugins.otp_totp.models import TOTPDevice  # type: ignore
 from django_otp.plugins.otp_email.models import EmailDevice  # type: ignore
 from django.utils.timezone import now
-from django.contrib.auth import logout
-from .models import Profile
-from django.utils.timezone import now
 from django.contrib.auth.middleware import get_user
-from datetime import timedelta
-from django.utils import timezone
-from django.utils.timezone import now
-from django.contrib.auth import logout
-from accounts.models import Profile
-from django.utils.dateparse import parse_datetime
 
 
 class LastSeenMiddleware:
