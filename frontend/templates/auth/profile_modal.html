@@ -33,21 +33,6 @@
             <label for="email" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"> Email </label>
             <input type="email" name="email" id="email" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500" value="{{ user.email }}" required />
           </div>
-
-          <div class="col-span-2">
-            <label for="phone_number" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white"> Phone Number </label>
-            <input type="text" name="phone_number" id="phone_number" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500" value="{{ user.profile.phone_number|default:''}}" placeholder="0712345678" required />
-          </div>
-
-          <div class="col-span-2 sm:col-span-1">
-            <label for="address" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Address</label>
-            <input type="text" name="address" id="address" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500"  value="{{ user.profile.home_address|default:'' }}" placeholder="00-00 kenya" />
-          </div>
-
-          <div class="col-span-2 sm:col-span-1">
-            <label for="date_of_birth" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Date of Birth</label>
-            <input type="date" name="date_of_birth" id="date_of_birth" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500" value="{{ user.profile.date_of_birth }}" />
-          </div>
           <div class="col-span-1">
             <label for="bio" class="mb-2 block text-sm font-medium text-gray-900 dark:text-white">Bio </label>
             <textarea name="bio" id="bio" rows="4" class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-primary-500 focus:ring-primary-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder:text-gray-400 dark:focus:border-primary-500 dark:focus:ring-primary-500" placeholder="Provide a description">{{ user.profile.bio|default:'' }}</textarea>
