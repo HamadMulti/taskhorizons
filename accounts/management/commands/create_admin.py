@@ -8,7 +8,7 @@ class Command(BaseCommand):
     def handle(self, *args, **kwargs):
         User = get_user_model()
 
-        admin_email = os.getenv("ADMIN_EMAIL", "taskhorizonapp@gmail.com")
+        admin_email = os.getenv("ADMIN_EMAIL", "hamads@taskhorizon.com")
         admin_password = os.getenv("ADMIN_PASSWORD", "hamads@123@taskhorizon")
 
         if not User.objects.filter(is_superuser=True).exists():
